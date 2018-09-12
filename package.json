@@ -1,0 +1,20 @@
+{
+  "name": "react-native-peiwen-dcs-framework",
+  "version": "1.0.0",
+  "description": "DCS API for react-native",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bingfeng1225/react-native-peiwen-dcs-framework.git"
+  },
+  "keywords": [
+    "rect-native",
+    "dcs",
+    "android",
+    "ios"
+  ],
+  "author": "peiwen",
+  "license": "MIT",
+  "homepage": "https://github.com/bingfeng1225/react-native-peiwen-dcs-framework#readme"
+}
