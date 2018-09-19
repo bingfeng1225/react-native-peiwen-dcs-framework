@@ -1,0 +1,10 @@
+package com.qd.peiwen.dcsframework.enmudefine;
+
+public enum  RNEventType {
+    TEXT_INPUT_STARTED,
+    TEXT_INPUT_FAILURED,
+    INPUT_EVENT_SUCCESSED,
+    VOICE_RECOGNIZE_STARTED,
+    VOICE_RECOGNIZE_FAILURED,
+    VOICE_RECOGNIZE_SUCCESSED;
+}
