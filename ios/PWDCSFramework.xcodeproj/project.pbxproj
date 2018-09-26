@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012ECB17215B1B7E00B22CA8 /* PWUUIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */; };
+		01335DA72154874800F773E4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01335DA62154874800F773E4 /* AVFoundation.framework */; };
+		01335DB321548C1600F773E4 /* PWChannelPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DB221548C1600F773E4 /* PWChannelPlayer.m */; };
+		01335DB621548C2F00F773E4 /* PWChannelParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DB521548C2F00F773E4 /* PWChannelParameters.m */; };
+		01335DB921548EAE00F773E4 /* PWChannelState.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DB821548EAE00F773E4 /* PWChannelState.m */; };
+		01335DBC2154944B00F773E4 /* PWChannelManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DBB2154944B00F773E4 /* PWChannelManager.m */; };
+		01335DC02154C35000F773E4 /* PWModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DBF2154C35000F773E4 /* PWModuleManager.m */; };
+		01335DC32154C36000F773E4 /* PWBaseModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DC22154C36000F773E4 /* PWBaseModule.m */; };
+		01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DC92154DB4C00F773E4 /* PWMessageQueue.m */; };
 		014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 014538E6214B564F00E792AF /* PWDCSFramework.m */; };
 		014538E8214B564F00E792AF /* PWDCSFramework.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 014538E5214B564F00E792AF /* PWDCSFramework.h */; };
+		01913E38215888D300D0EFF4 /* PWFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E37215888D300D0EFF4 /* PWFramework.m */; };
+		01913E3C2158D15F00D0EFF4 /* PWHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E3B2158D15F00D0EFF4 /* PWHttpManager.m */; };
+		01913E3F2158D87C00D0EFF4 /* PWHTextInputRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E3E2158D87C00D0EFF4 /* PWHTextInputRequest.m */; };
+		01913E422158D89000D0EFF4 /* PWBTextInputRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E412158D89000D0EFF4 /* PWBTextInputRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,9 +38,35 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		012ECB15215B1B7E00B22CA8 /* PWUUIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWUUIDManager.h; sourceTree = "<group>"; };
+		012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWUUIDManager.m; sourceTree = "<group>"; };
+		01335DA62154874800F773E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		01335DAF2154881D00F773E4 /* PWPlayerEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWPlayerEnum.h; sourceTree = "<group>"; };
+		01335DB121548C1600F773E4 /* PWChannelPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelPlayer.h; sourceTree = "<group>"; };
+		01335DB221548C1600F773E4 /* PWChannelPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChannelPlayer.m; sourceTree = "<group>"; };
+		01335DB421548C2F00F773E4 /* PWChannelParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelParameters.h; sourceTree = "<group>"; };
+		01335DB521548C2F00F773E4 /* PWChannelParameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChannelParameters.m; sourceTree = "<group>"; };
+		01335DB721548EAE00F773E4 /* PWChannelState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelState.h; sourceTree = "<group>"; };
+		01335DB821548EAE00F773E4 /* PWChannelState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChannelState.m; sourceTree = "<group>"; };
+		01335DBA2154944B00F773E4 /* PWChannelManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelManager.h; sourceTree = "<group>"; };
+		01335DBB2154944B00F773E4 /* PWChannelManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChannelManager.m; sourceTree = "<group>"; };
+		01335DBE2154C35000F773E4 /* PWModuleManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWModuleManager.h; sourceTree = "<group>"; };
+		01335DBF2154C35000F773E4 /* PWModuleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWModuleManager.m; sourceTree = "<group>"; };
+		01335DC12154C36000F773E4 /* PWBaseModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWBaseModule.h; sourceTree = "<group>"; };
+		01335DC22154C36000F773E4 /* PWBaseModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBaseModule.m; sourceTree = "<group>"; };
+		01335DC82154DB4C00F773E4 /* PWMessageQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWMessageQueue.h; sourceTree = "<group>"; };
+		01335DC92154DB4C00F773E4 /* PWMessageQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWMessageQueue.m; sourceTree = "<group>"; };
 		014538E2214B564F00E792AF /* libPWDCSFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPWDCSFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		014538E5214B564F00E792AF /* PWDCSFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDCSFramework.h; sourceTree = "<group>"; };
 		014538E6214B564F00E792AF /* PWDCSFramework.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDCSFramework.m; sourceTree = "<group>"; };
+		01913E36215888D300D0EFF4 /* PWFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWFramework.h; sourceTree = "<group>"; };
+		01913E37215888D300D0EFF4 /* PWFramework.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWFramework.m; sourceTree = "<group>"; };
+		01913E3A2158D15F00D0EFF4 /* PWHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWHttpManager.h; sourceTree = "<group>"; };
+		01913E3B2158D15F00D0EFF4 /* PWHttpManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWHttpManager.m; sourceTree = "<group>"; };
+		01913E3D2158D87C00D0EFF4 /* PWHTextInputRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWHTextInputRequest.h; sourceTree = "<group>"; };
+		01913E3E2158D87C00D0EFF4 /* PWHTextInputRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWHTextInputRequest.m; sourceTree = "<group>"; };
+		01913E402158D89000D0EFF4 /* PWBTextInputRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWBTextInputRequest.h; sourceTree = "<group>"; };
+		01913E412158D89000D0EFF4 /* PWBTextInputRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWBTextInputRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +74,72 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01335DA72154874800F773E4 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012ECB14215B1B6E00B22CA8 /* uuid */ = {
+			isa = PBXGroup;
+			children = (
+				012ECB15215B1B7E00B22CA8 /* PWUUIDManager.h */,
+				012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */,
+			);
+			path = uuid;
+			sourceTree = "<group>";
+		};
+		01335DA52154874800F773E4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01335DA62154874800F773E4 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		01335DAC2154881D00F773E4 /* musicplayer */ = {
+			isa = PBXGroup;
+			children = (
+				01335DAF2154881D00F773E4 /* PWPlayerEnum.h */,
+				01335DB121548C1600F773E4 /* PWChannelPlayer.h */,
+				01335DB221548C1600F773E4 /* PWChannelPlayer.m */,
+				01335DB421548C2F00F773E4 /* PWChannelParameters.h */,
+				01335DB521548C2F00F773E4 /* PWChannelParameters.m */,
+				01335DB721548EAE00F773E4 /* PWChannelState.h */,
+				01335DB821548EAE00F773E4 /* PWChannelState.m */,
+				01335DBA2154944B00F773E4 /* PWChannelManager.h */,
+				01335DBB2154944B00F773E4 /* PWChannelManager.m */,
+			);
+			path = musicplayer;
+			sourceTree = "<group>";
+		};
+		01335DBD2154C27000F773E4 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				01335DBE2154C35000F773E4 /* PWModuleManager.h */,
+				01335DBF2154C35000F773E4 /* PWModuleManager.m */,
+				01335DC12154C36000F773E4 /* PWBaseModule.h */,
+				01335DC22154C36000F773E4 /* PWBaseModule.m */,
+			);
+			path = modules;
+			sourceTree = "<group>";
+		};
+		01335DC72154C4BF00F773E4 /* messagequeue */ = {
+			isa = PBXGroup;
+			children = (
+				01335DC82154DB4C00F773E4 /* PWMessageQueue.h */,
+				01335DC92154DB4C00F773E4 /* PWMessageQueue.m */,
+			);
+			path = messagequeue;
+			sourceTree = "<group>";
+		};
 		014538D9214B564F00E792AF = {
 			isa = PBXGroup;
 			children = (
 				014538E4214B564F00E792AF /* PWDCSFramework */,
 				014538E3214B564F00E792AF /* Products */,
+				01335DA52154874800F773E4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,10 +154,38 @@
 		014538E4214B564F00E792AF /* PWDCSFramework */ = {
 			isa = PBXGroup;
 			children = (
+				012ECB14215B1B6E00B22CA8 /* uuid */,
+				01913E392158D14300D0EFF4 /* http */,
+				01913E35215888C300D0EFF4 /* framework */,
+				01335DC72154C4BF00F773E4 /* messagequeue */,
+				01335DBD2154C27000F773E4 /* modules */,
+				01335DAC2154881D00F773E4 /* musicplayer */,
 				014538E5214B564F00E792AF /* PWDCSFramework.h */,
 				014538E6214B564F00E792AF /* PWDCSFramework.m */,
 			);
 			path = PWDCSFramework;
+			sourceTree = "<group>";
+		};
+		01913E35215888C300D0EFF4 /* framework */ = {
+			isa = PBXGroup;
+			children = (
+				01913E36215888D300D0EFF4 /* PWFramework.h */,
+				01913E37215888D300D0EFF4 /* PWFramework.m */,
+			);
+			path = framework;
+			sourceTree = "<group>";
+		};
+		01913E392158D14300D0EFF4 /* http */ = {
+			isa = PBXGroup;
+			children = (
+				01913E3A2158D15F00D0EFF4 /* PWHttpManager.h */,
+				01913E3B2158D15F00D0EFF4 /* PWHttpManager.m */,
+				01913E3D2158D87C00D0EFF4 /* PWHTextInputRequest.h */,
+				01913E3E2158D87C00D0EFF4 /* PWHTextInputRequest.m */,
+				01913E402158D89000D0EFF4 /* PWBTextInputRequest.h */,
+				01913E412158D89000D0EFF4 /* PWBTextInputRequest.m */,
+			);
+			path = http;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,7 +244,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01335DB621548C2F00F773E4 /* PWChannelParameters.m in Sources */,
+				01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */,
+				01913E3F2158D87C00D0EFF4 /* PWHTextInputRequest.m in Sources */,
 				014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */,
+				01335DC02154C35000F773E4 /* PWModuleManager.m in Sources */,
+				01913E38215888D300D0EFF4 /* PWFramework.m in Sources */,
+				012ECB17215B1B7E00B22CA8 /* PWUUIDManager.m in Sources */,
+				01913E3C2158D15F00D0EFF4 /* PWHttpManager.m in Sources */,
+				01335DC32154C36000F773E4 /* PWBaseModule.m in Sources */,
+				01335DB921548EAE00F773E4 /* PWChannelState.m in Sources */,
+				01335DBC2154944B00F773E4 /* PWChannelManager.m in Sources */,
+				01335DB321548C1600F773E4 /* PWChannelPlayer.m in Sources */,
+				01913E422158D89000D0EFF4 /* PWBTextInputRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

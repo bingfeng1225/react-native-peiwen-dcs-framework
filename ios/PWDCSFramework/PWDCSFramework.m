@@ -15,8 +15,41 @@
 #endif
 #import "PWDCSFramework.h"
 
+#import "PWFramework.h"
+#import "PWChannelManager.h"
+
+@interface PWDCSFramework ()
+
+@property (nonatomic,strong) PWFramework *framework;
+
+@end
+
 @implementation PWDCSFramework
 
 RCT_EXPORT_MODULE();
 
+
+RCT_EXPORT_METHOD(initFramework:(NSDictionary *)param
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+    if(!self.framework){
+        self.framework = [[PWFramework alloc] init];
+        self.framework.token = [param objectForKey:@"token"];
+        self.framework.deviceid = [param objectForKey:@"deviceid"];
+        [self.framework initFramework];
+    }
+}
+
+RCT_EXPORT_METHOD(sendTextRequest:(NSString *)content){
+    if(self.framework){
+        [self.framework sendHTextInputRequest:content];
+    }
+}
+
+RCT_EXPORT_METHOD(releaseFramework){
+    if(self.framework){
+        [self.framework releaseFramework];
+        self.framework = nil;
+    }
+}
 @end

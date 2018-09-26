@@ -1,6 +1,6 @@
 {
   "name": "react-native-peiwen-dcs-framework",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "DCS API for react-native",
   "main": "index.js",
   "typings": "index.d.ts",
