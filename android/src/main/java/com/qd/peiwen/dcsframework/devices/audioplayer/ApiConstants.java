@@ -24,12 +24,6 @@ public class ApiConstants {
     public static final String NAME = "AudioPlayerInterface";
     public static final String NAMESPACE = "ai.dueros.device_interface.audio_player";
 
-    public static final class States{
-        public static final class PlaybackState {
-            public static final String NAME = PlaybackState.class.getSimpleName();
-        }
-    }
-
     public static final class Events {
         public static final class PlaybackStarted {
             public static final String NAME = PlaybackStarted.class.getSimpleName();

@@ -24,18 +24,6 @@ public class ApiConstants {
     public static final String NAME = "ScreenInterface";
     public static final String NAMESPACE = "ai.dueros.device_interface.screen";
 
-    public static final class States{
-        public static final class ViewState {
-            public static final String NAME = ViewState.class.getSimpleName();
-        }
-    }
-
-    public static final class Events {
-        public static final class LinkClicked {
-            public static final String NAME = LinkClicked.class.getSimpleName();
-        }
-    }
-
     public static final class Directives {
         public static final class RenderCard {
             public static final String NAME = RenderCard.class.getSimpleName();

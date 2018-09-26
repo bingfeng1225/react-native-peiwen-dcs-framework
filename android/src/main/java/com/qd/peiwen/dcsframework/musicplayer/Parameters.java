@@ -15,7 +15,6 @@ public class Parameters {
     public int duration = 0;
     public int position = 0;
     public Object playObject = null;
-    public boolean pauseByUser = false;
     public boolean enterBackground = false;
     public boolean audioRecordStarted = false;
     public boolean dialogChannelOccupied = false;
@@ -25,15 +24,12 @@ public class Parameters {
 
     public void initChannelStates() {
         this.channelStates = new HashMap<>();
-        this.channelStates.put(ChannelType.RECORD, false);
         this.channelStates.put(ChannelType.SPEAK, false);
         this.channelStates.put(ChannelType.AUDIO, false);
     }
 
     public boolean isConditionsMeetRequirements() {
-        if (pauseByUser) {
-            return false;
-        } else if (enterBackground) {
+        if (enterBackground) {
             return false;
         } else if (audioRecordStarted) {
             return false;

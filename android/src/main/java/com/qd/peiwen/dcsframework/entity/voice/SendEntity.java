@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class SendEntity {
     @SerializedName("type")
-    private String type;
+    private String type = "text";
     @SerializedName("token")
     private String token = "access_token";
     @SerializedName("deviceid")
@@ -31,8 +31,6 @@ public class SendEntity {
     public void setType(String type) {
         this.type = type;
     }
-
-
 
     public String getToken() {
         return token;

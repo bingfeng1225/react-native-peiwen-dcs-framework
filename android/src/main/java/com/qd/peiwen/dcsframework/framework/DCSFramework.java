@@ -140,7 +140,6 @@ public class DCSFramework implements
         this.deviceManager.phoneBillModule().setListener(this);
         this.deviceManager.ticketModule().setListener(this);
         this.deviceManager.speakerControllerModule().setListener(this);
-        this.deviceManager.speakerControllerModule().setVolumeManager(this.volumeManager);
         this.deviceManager.voiceOutputModule().setHttpClient(this.httpManager.httpClient());
         this.deviceManager.init();
     }
@@ -158,12 +157,6 @@ public class DCSFramework implements
     }
 
     /************************ 功能接口 **********************************/
-    public void userActivity() {
-        deviceManager.systemModule().userActivity();
-    }
-
-
-
     public void callPhone(String phone) {
         deviceManager.phoneModule().callPhone(phone);
     }
@@ -181,7 +174,8 @@ public class DCSFramework implements
     }
 
     public void sendVoiceRecognizeRequest(SendEventCard card) {
-        httpManager.voiceRecognizeRequest(card, this.lastSessionid, new VoiceRecognizeListener(card));
+        card.setSessionid(this.lastSessionid);
+        httpManager.voiceRecognizeRequest(card, new VoiceRecognizeListener(card));
     }
 
     public void sendTextInputEvent(VoiceRecognizePayload payload) {
@@ -202,9 +196,6 @@ public class DCSFramework implements
         return true;
     }
 
-    private void sendSynchronizeStateEvent() {
-        httpManager.eventRequest(deviceManager.synchronizeStateRequest(), new EventListener());
-    }
 
     private void sendExceptionEncounteredEvent(String unparse, String type, String message) {
         DCSRequest request = deviceManager.exceptionEncounteredRequest(unparse, type, message);
@@ -254,7 +245,6 @@ public class DCSFramework implements
         this.channelManager.dialogChannelOccupied();
         this.deviceManager.voiceOutputModule().channelPlayer().stop();
     }
-
 
     @Override
     public void onSpeakChannelOccupied() {

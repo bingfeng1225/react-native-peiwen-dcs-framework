@@ -9,12 +9,9 @@ import com.qd.peiwen.dcsframework.devices.voiceoutput.listener.IVoiceOutputModul
 import com.qd.peiwen.dcsframework.devices.voiceoutput.message.directive.SpeakPayload;
 import com.qd.peiwen.dcsframework.devices.voiceoutput.message.enevt.SpeechFinishedPayload;
 import com.qd.peiwen.dcsframework.devices.voiceoutput.message.enevt.SpeechStartedPayload;
-import com.qd.peiwen.dcsframework.devices.voiceoutput.message.state.SpeechStatePayload;
-import com.qd.peiwen.dcsframework.enmudefine.SpeechState;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
 import com.qd.peiwen.dcsframework.entity.header.MessageIdHeader;
 import com.qd.peiwen.dcsframework.entity.payload.BasePayload;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.request.EventMessage;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 import com.qd.peiwen.dcsframework.httppackage.HttpConfig;
@@ -41,7 +38,6 @@ public class VoiceOutputModule extends BaseModule implements IChannelPlayerListe
     private OkHttpClient httpClient;
     private SynthesisPlayer channelPlayer;
     private LinkedList<SpeakPayload> speakPayloads;
-    private SpeechState speechState = SpeechState.FINISHED;
     private WeakReference<IVoiceOutputModuleListener> listener;
 
     public VoiceOutputModule(Context context) {
@@ -74,24 +70,6 @@ public class VoiceOutputModule extends BaseModule implements IChannelPlayerListe
     public void init() {
         super.init();
         this.initChannelPlayer();
-    }
-
-    @Override
-    public ClientContext clientContext() {
-        BaseHeader header = new BaseHeader();
-        header.setName(ApiConstants.States.SpeechState.NAME);
-        header.setNamespace(ApiConstants.NAMESPACE);
-
-        SpeechStatePayload payload = new SpeechStatePayload();
-        Object object = this.channelPlayer.lastObject();
-        if (object == null) {
-            payload.setToken(null);
-        } else {
-            payload.setToken(((SpeakPayload) object).getToken());
-        }
-        payload.setOffsetInMilliseconds(this.offsetInMilliseconds());
-        payload.setPlayerActivity(this.speechState.name());
-        return new ClientContext(header, payload);
     }
 
     @Override
@@ -186,7 +164,7 @@ public class VoiceOutputModule extends BaseModule implements IChannelPlayerListe
 
     private String synthesisURL(SpeakPayload payload) {
         StringBuilder builder = new StringBuilder();
-        builder.append(HttpConfig.HttpUrls.SPEAK_DOWNLOAD_URL);
+        builder.append(HttpConfig.speakDownloadURL);
         builder.append("text=");
         builder.append(payload.getContent());
         builder.append("&cuid=");
@@ -201,7 +179,6 @@ public class VoiceOutputModule extends BaseModule implements IChannelPlayerListe
     private synchronized void playerFinished(SpeakPayload payload) {
         LogUtils.e("VoiceOutputModule playerFinished");
         this.speakPayloads.poll();
-        this.speechState = SpeechState.FINISHED;
         FileUtils.deleteFile(payload.getPlayerURL(this.context));
         this.fireSpeechFinished(payload.getToken());
         this.findRecordToPlay();

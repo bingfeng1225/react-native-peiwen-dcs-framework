@@ -219,46 +219,10 @@ public class ChannelPlayer implements
         this.setPlayerState(PlayerState.PLAYER_IDLE);
     }
 
-    public void rewind() {
-        if (this.canSeek()) {
-            int cur = mediaPlayer.getCurrentPosition();
-            if (cur > 5 * 1000) {
-                seekToTime((cur - 5 * 1000));
-            } else {
-                seekToTime(0);
-            }
-        }
-    }
-
-    public void fastForward() {
-        if (this.canSeek()) {
-            int cur = mediaPlayer.getCurrentPosition();
-            int total = mediaPlayer.getDuration();
-            if (total - cur > 5 * 1000) {
-                seekToTime((cur + 5 * 1000));
-            } else {
-                seekToTime(total);
-            }
-        }
-    }
 
     public void seekToTime(int msec) {
         if (this.canSeek()) {
             mediaPlayer.seekTo(msec);
-        }
-    }
-
-    public void pause() {
-        if (!this.parameters.pauseByUser) {
-            this.parameters.pauseByUser = true;
-            this.parametersChanged();
-        }
-    }
-
-    public void resume() {
-        if (!this.parameters.pauseByUser) {
-            this.parameters.pauseByUser = false;
-            this.parametersChanged();
         }
     }
 

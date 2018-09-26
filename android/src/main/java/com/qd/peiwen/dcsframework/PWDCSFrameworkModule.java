@@ -5,6 +5,7 @@ package com.qd.peiwen.dcsframework;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
 import com.qd.peiwen.dcsframework.devices.lifevoice.message.directive.LifeVoicePayload;
@@ -21,17 +22,13 @@ import com.qd.peiwen.dcsframework.devices.screen.message.directive.TextCardPaylo
 import com.qd.peiwen.dcsframework.devices.ticket.message.directive.TicketPayload;
 import com.qd.peiwen.dcsframework.devices.voicerecognize.message.directive.VoiceRecognizePayload;
 import com.qd.peiwen.dcsframework.enmudefine.RNEventType;
-import com.qd.peiwen.dcsframework.enmudefine.SendEventState;
 import com.qd.peiwen.dcsframework.entity.screen.SendEventCard;
 import com.qd.peiwen.dcsframework.framework.DCSFramework;
 import com.qd.peiwen.dcsframework.framework.IDCSFrameListener;
 import com.qd.peiwen.dcsframework.httppackage.HttpConfig;
 import com.qd.peiwen.dcsframework.tools.IDCreator;
 
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.annotation.Nullable;
 
 public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements IDCSFrameListener {
 
@@ -49,15 +46,19 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void initFramework(String deviceid,String token){
-        HttpConfig.token = token;
-        HttpConfig.deviceID = deviceid;
+    public void initFramework(ReadableMap map){
+        HttpConfig.token = map.getString("token");
+        HttpConfig.eventURL = map.getString("event");
+        HttpConfig.deviceID = map.getString("deviceid");
+        HttpConfig.speakDownloadURL = map.getString("speak");
+        HttpConfig.voiceRecognizeRRL = map.getString("voice");
         if(null == this.framework) {
             this.framework = new DCSFramework(this.context);
             this.framework.setListener(this);
             this.framework.init();
         }
     }
+
 
     @ReactMethod
     public void releaseFramework(){
@@ -134,32 +135,56 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
 
     @Override
     public void onRecvTextCard(TextCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_TEXT_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvListCard(ListCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_LIST_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvServiceCard(ServiceCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_SERVICE_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvStandardCard(StandardCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_STANDARD_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvImageListCard(ImageListCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_IMAGE_LIST_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvPhoneListCard(PhoneListCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_PHONE_LIST_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
@@ -171,12 +196,20 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
 
     @Override
     public void onRecvServiceListCard(ServiceListCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_SERVICE_LIST_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvSMSMessageListCard(SMSMessageListCardPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECEIVE_SMSMESSAGE_LIST_CARD.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
@@ -203,4 +236,5 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
     public void onRecvFlightTicket(TicketPayload payload) {
 
     }
+
 }

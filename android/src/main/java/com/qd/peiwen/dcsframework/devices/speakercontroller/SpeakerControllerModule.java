@@ -11,11 +11,9 @@ import com.qd.peiwen.dcsframework.devices.speakercontroller.message.directive.Se
 import com.qd.peiwen.dcsframework.devices.speakercontroller.message.directive.SetVolumePayload;
 import com.qd.peiwen.dcsframework.devices.speakercontroller.message.event.MuteChangedPayload;
 import com.qd.peiwen.dcsframework.devices.speakercontroller.message.event.VolumeChangedPayload;
-import com.qd.peiwen.dcsframework.devices.speakercontroller.message.state.VolumeStatePayload;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
 import com.qd.peiwen.dcsframework.entity.header.MessageIdHeader;
 import com.qd.peiwen.dcsframework.entity.payload.BasePayload;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.request.EventMessage;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 import com.qd.peiwen.dcsframework.tools.IDCreator;
@@ -28,7 +26,6 @@ import java.lang.ref.WeakReference;
  */
 
 public class SpeakerControllerModule extends BaseModule {
-    private WeakReference<VolumeManager> volumeManager;
     private WeakReference<ISpeakerControllerModuleListener> listener;
 
     public SpeakerControllerModule(Context context) {
@@ -38,25 +35,9 @@ public class SpeakerControllerModule extends BaseModule {
     public void setListener(ISpeakerControllerModuleListener listener) {
         this.listener = new WeakReference<>(listener);
     }
-    public void setVolumeManager(VolumeManager volumeManager) {
-        this.volumeManager = new WeakReference<>(volumeManager);
-    }
+
 
     /************************ Base重写方法 **********************************/
-    @Override
-    public ClientContext clientContext() {
-        if (null != volumeManager && null != volumeManager.get()) {
-            BaseHeader header = new BaseHeader();
-            header.setName(ApiConstants.States.VolumeState.NAME);
-            header.setNamespace(ApiConstants.NAMESPACE);
-            VolumeStatePayload payload = new VolumeStatePayload();
-            payload.setMuted(this.volumeManager.get().isMuted());
-            payload.setVolume(this.volumeManager.get().getVolume());
-            return new ClientContext(header, payload);
-        }
-        return null;
-    }
-
     @Override
     public boolean handleDirective(Directive directive) {
         BaseHeader header = directive.getHeader();
@@ -76,7 +57,6 @@ public class SpeakerControllerModule extends BaseModule {
     public void release() {
         super.release();
         this.listener = null;
-        this.volumeManager = null;
     }
 
     /************************ 事件封装方法 **********************************/

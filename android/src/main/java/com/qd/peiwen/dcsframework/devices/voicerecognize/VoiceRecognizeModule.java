@@ -7,10 +7,8 @@ import com.qd.peiwen.dcsframework.devices.BaseModule;
 import com.qd.peiwen.dcsframework.devices.PayloadManager;
 import com.qd.peiwen.dcsframework.devices.voicerecognize.listener.IVoiceRecognizeModuleListener;
 import com.qd.peiwen.dcsframework.devices.voicerecognize.message.directive.VoiceRecognizePayload;
-import com.qd.peiwen.dcsframework.enmudefine.SpeechState;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
 import com.qd.peiwen.dcsframework.entity.payload.BasePayload;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 
 import java.lang.ref.WeakReference;
@@ -20,7 +18,6 @@ import java.lang.ref.WeakReference;
  */
 
 public class VoiceRecognizeModule extends BaseModule {
-    private SpeechState speechState = SpeechState.FINISHED;
     private WeakReference<IVoiceRecognizeModuleListener> listener;
 
     public VoiceRecognizeModule(Context context) {
@@ -35,11 +32,6 @@ public class VoiceRecognizeModule extends BaseModule {
     @Override
     public void init() {
         super.init();
-    }
-
-    @Override
-    public ClientContext clientContext() {
-        return null;
     }
 
     @Override

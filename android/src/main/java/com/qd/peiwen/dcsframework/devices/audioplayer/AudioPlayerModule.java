@@ -18,7 +18,6 @@ import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackPaus
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackQueueClearedPayload;
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackResumedPayload;
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackStartedPayload;
-import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackStatePayload;
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackStoppedPayload;
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackStutterFinishedPayload;
 import com.qd.peiwen.dcsframework.devices.audioplayer.message.event.PlaybackStutterStartedPayload;
@@ -30,7 +29,6 @@ import com.qd.peiwen.dcsframework.enmudefine.ClearBehavior;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
 import com.qd.peiwen.dcsframework.entity.header.MessageIdHeader;
 import com.qd.peiwen.dcsframework.entity.payload.BasePayload;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.request.EventMessage;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 import com.qd.peiwen.dcsframework.musicplayer.ChannelPlayer;
@@ -82,19 +80,6 @@ public class AudioPlayerModule extends BaseModule implements IChannelPlayerListe
     public void init() {
         super.init();
         this.initChannnelPlayer();
-    }
-
-    @Override
-    public ClientContext clientContext() {
-        BaseHeader header = new BaseHeader();
-        header.setNamespace(ApiConstants.NAMESPACE);
-        header.setName(ApiConstants.States.PlaybackState.NAME);
-        PlaybackStatePayload payload = new PlaybackStatePayload();
-        Object object = channelPlayer.lastObject();
-        payload.setOffsetInMilliseconds(channelPlayer.lastPosition());
-        payload.setToken((object == null) ? null : ((AudioStream) object).getToken());
-        payload.setPlayerActivity(this.playActivity());
-        return new ClientContext(header, payload);
     }
 
     @Override

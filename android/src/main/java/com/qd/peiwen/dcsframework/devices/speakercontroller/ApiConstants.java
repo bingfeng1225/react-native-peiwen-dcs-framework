@@ -24,12 +24,6 @@ public class ApiConstants {
     public static final String NAME = "SpeakerControllerInterface";
     public static final String NAMESPACE = "ai.dueros.device_interface.speaker_controller";
 
-    public static final class States {
-        public static final class VolumeState {
-            public static final String NAME = VolumeState.class.getSimpleName();
-        }
-    }
-
     public static final class Events {
         public static final class VolumeChanged {
             public static final String NAME = VolumeChanged.class.getSimpleName();

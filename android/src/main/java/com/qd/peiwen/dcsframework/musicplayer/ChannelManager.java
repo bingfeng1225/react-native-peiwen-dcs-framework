@@ -87,26 +87,6 @@ public class ChannelManager {
         }
     }
 
-    public synchronized void recordChannelReleased() {
-        LogUtils.e("recordChannelReleased----------------");
-        if (null == this.players) {
-            return;
-        }
-        for (ChannelPlayer player : this.players.values()) {
-            player.channelStateChanged(ChannelType.RECORD, false);
-        }
-    }
-
-    public synchronized void recordChannelOccupied() {
-        LogUtils.e("recordChannelOccupied----------------");
-        if (null == this.players) {
-            return;
-        }
-        for (ChannelPlayer player : this.players.values()) {
-            player.channelStateChanged(ChannelType.RECORD, true);
-        }
-    }
-
     public synchronized void speakChannelReleased() {
         LogUtils.e("speakChannelReleased----------------");
         if (null == this.players) {

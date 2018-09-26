@@ -7,19 +7,9 @@ package com.qd.peiwen.dcsframework.httppackage;
 public class HttpConfig {
     public static String token;
     public static String deviceID;
-
-    public static class HttpUrls {
-        // 请求https
-        public static final String SHEME = "https://";
-        // 请求host
-        public static final String HOST = "dueros-h2.baidu.com";
-        // 请求event事件
-        public static final String EVENTS = "/dcs/v1/events";
-        // Download Speak
-        public static final String SPEAK_DOWNLOAD_URL = "http://27.223.99.143:11181/speech/speech/speechsy?";
-
-        public static final String VOICE_RECOGNIZE_URL = "http://27.223.99.143:11181/smartapp/smart/direct";
-    }
+    public static String eventURL;
+    public static String speakDownloadURL;
+    public static String voiceRecognizeRRL;
 
     public static class HttpTags {
         // 请求event事件TAG
@@ -46,11 +36,6 @@ public class HttpConfig {
     public static class Parameters {
         public static final String BOUNDARY = "boundary";
         public static final String DATA_METADATA = "metadata";
-    }
-
-    public static class AuthorizeParameters {
-        public static final String CLIENT_ID = "client_id";
-        public static final String CLIENT_SECRET = "client_secret";
     }
 
     public static class TimeOut {

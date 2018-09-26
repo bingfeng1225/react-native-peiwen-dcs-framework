@@ -5,7 +5,6 @@ package com.qd.peiwen.dcsframework.volume;
  */
 
 public interface IVolumeListener {
-
     void onMuteChanged(int volume);
 
     void onVolumeChanged(int volume);

@@ -21,8 +21,6 @@ import java.util.List;
 public class DCSRequest {
     @SerializedName("event")
     private EventMessage event;
-    @SerializedName("clientContext")
-    private List<ClientContext> clientContexts;
 
     public DCSRequest() {
         
@@ -34,13 +32,5 @@ public class DCSRequest {
 
     public void setEvent(EventMessage event) {
         this.event = event;
-    }
-
-    public List<ClientContext> getClientContexts() {
-        return clientContexts;
-    }
-
-    public void setClientContexts(List<ClientContext> clientContexts) {
-        this.clientContexts = clientContexts;
     }
 }

@@ -17,11 +17,9 @@ import com.qd.peiwen.dcsframework.devices.ticket.TicketModule;
 import com.qd.peiwen.dcsframework.devices.voiceoutput.VoiceOutputModule;
 import com.qd.peiwen.dcsframework.devices.voicerecognize.VoiceRecognizeModule;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.request.DCSRequest;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,17 +90,6 @@ public class DeviceManager {
         }
     }
 
-    /************************ ClientContexts封装 **********************************/
-    public ArrayList<ClientContext> clientContexts() {
-        ArrayList<ClientContext> clientContexts = new ArrayList<>();
-        for (BaseModule deviceModule : this.modules.values()) {
-            ClientContext clientContext = deviceModule.clientContext();
-            if (clientContext != null) {
-                clientContexts.add(clientContext);
-            }
-        }
-        return clientContexts;
-    }
 
     /************************ Directive处理 **********************************/
     public boolean handleDirective(Directive directive) {
@@ -131,7 +118,6 @@ public class DeviceManager {
 
     public DCSRequest textinputRequest(String text) {
         DCSRequest request = new DCSRequest();
-        request.setClientContexts(clientContexts());
         request.setEvent(textInputModule().textinputMessage(text));
         return request;
     }
@@ -164,22 +150,9 @@ public class DeviceManager {
         return factory.screenModule(context);
     }
 
-    public DCSRequest linkclickedRequest(String url) {
-        DCSRequest request = new DCSRequest();
-        request.setEvent(screenModule().linkclickedRequest(url));
-        return request;
-    }
-
     /************************ System Event **********************************/
     public SystemModule systemModule() {
         return factory.systemModule(context);
-    }
-
-    public DCSRequest synchronizeStateRequest() {
-        DCSRequest request = new DCSRequest();
-        request.setClientContexts(clientContexts());
-        request.setEvent(systemModule().synchronizeStateRequest());
-        return request;
     }
 
     public DCSRequest userInactivityReportRequest(long userInactivity) {
@@ -190,7 +163,6 @@ public class DeviceManager {
 
     public DCSRequest exceptionEncounteredRequest(String unparse, String type, String message) {
         DCSRequest request = new DCSRequest();
-        request.setClientContexts(clientContexts());
         request.setEvent(systemModule().exceptionEncounteredRequest(unparse, type, message));
         return request;
     }
@@ -211,6 +183,7 @@ public class DeviceManager {
         request.setEvent(voiceOutputModule().speechFinishedRequest(token));
         return request;
     }
+
 
     /************************ AudioPalyer Event **********************************/
     public AudioPlayerModule audioPlayerModule() {

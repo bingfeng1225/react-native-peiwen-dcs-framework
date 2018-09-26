@@ -2,7 +2,6 @@ package com.qd.peiwen.dcsframework.devices;
 
 import android.content.Context;
 
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
 
 
@@ -32,10 +31,6 @@ public abstract class BaseModule {
 
     public void init() {
         this.released = false;
-    }
-
-    public ClientContext clientContext() {
-        return null;
     }
 
     public boolean handleDirective(Directive directive) {

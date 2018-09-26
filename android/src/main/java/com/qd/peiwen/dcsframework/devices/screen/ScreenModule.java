@@ -29,16 +29,10 @@ import com.qd.peiwen.dcsframework.devices.screen.message.directive.ServiceCardPa
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.ServiceListCardPayload;
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.StandardCardPayload;
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.TextCardPayload;
-import com.qd.peiwen.dcsframework.devices.screen.message.event.LinkClickedPayload;
-import com.qd.peiwen.dcsframework.devices.screen.message.state.ViewStatePayload;
 import com.qd.peiwen.dcsframework.enmudefine.RenderCardType;
 import com.qd.peiwen.dcsframework.entity.header.BaseHeader;
-import com.qd.peiwen.dcsframework.entity.header.MessageIdHeader;
 import com.qd.peiwen.dcsframework.entity.payload.BasePayload;
-import com.qd.peiwen.dcsframework.entity.request.ClientContext;
-import com.qd.peiwen.dcsframework.entity.request.EventMessage;
 import com.qd.peiwen.dcsframework.entity.respons.Directive;
-import com.qd.peiwen.dcsframework.tools.IDCreator;
 
 import java.lang.ref.WeakReference;
 
@@ -48,7 +42,6 @@ import java.lang.ref.WeakReference;
  * Created by wuruisheng on 2017/5/31.
  */
 public class ScreenModule extends BaseModule {
-    private String lastViewToken = null;
     private WeakReference<IScreenModuleListener> listener;
 
     public ScreenModule(Context context) {
@@ -60,16 +53,6 @@ public class ScreenModule extends BaseModule {
     }
 
     /************************ Base重写方法 **********************************/
-    @Override
-    public ClientContext clientContext() {
-        BaseHeader header = new BaseHeader();
-        header.setName(ApiConstants.States.ViewState.NAME);
-        header.setNamespace(ApiConstants.NAMESPACE);
-        ViewStatePayload payload = new ViewStatePayload();
-        payload.setToken(lastViewToken);
-        return new ClientContext(header, payload);
-    }
-
     @Override
     public boolean handleDirective(Directive directive) {
         BaseHeader header = directive.getHeader();
@@ -84,18 +67,6 @@ public class ScreenModule extends BaseModule {
     public void release() {
         super.release();
         this.listener = null;
-        this.lastViewToken = null;
-    }
-
-    /************************ 事件封装方法 **********************************/
-    public EventMessage linkclickedRequest(String url) {
-        MessageIdHeader header = IDCreator.createMessageIdHeader(
-                ApiConstants.NAMESPACE,
-                ApiConstants.Events.LinkClicked.NAME
-        );
-        LinkClickedPayload payload = new LinkClickedPayload();
-        payload.setUrl(url);
-        return new EventMessage(header, payload);
     }
 
     /************************ 指令处理方法 **********************************/
@@ -138,14 +109,12 @@ public class ScreenModule extends BaseModule {
 
     /************************ Listener分发方法 **********************************/
     private void fireRecvTextCard(TextCardPayload payload) {
-        this.lastViewToken = payload.getToken();
         if (null != this.listener && null != listener.get()) {
             this.listener.get().onRecvTextCard(payload);
         }
     }
 
     private void fireRecvListCard(ListCardPayload payload) {
-        this.lastViewToken = payload.getToken();
         if (null != this.listener && null != listener.get()) {
             this.listener.get().onRecvListCard(payload);
         }
@@ -158,14 +127,12 @@ public class ScreenModule extends BaseModule {
     }
 
     private void fireRecvStandardCard(StandardCardPayload payload) {
-        this.lastViewToken = payload.getToken();
         if (null != this.listener && null != listener.get()) {
             this.listener.get().onRecvStandardCard(payload);
         }
     }
 
     private void fireRecvImageListCard(ImageListCardPayload payload) {
-        this.lastViewToken = payload.getToken();
         if (null != this.listener && null != listener.get()) {
             this.listener.get().onRecvImageListCard(payload);
         }

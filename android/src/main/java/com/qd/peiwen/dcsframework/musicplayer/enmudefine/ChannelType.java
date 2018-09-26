@@ -7,8 +7,7 @@ package com.qd.peiwen.dcsframework.musicplayer.enmudefine;
 public enum ChannelType {
     NONE("NONE", 0),
     AUDIO("AUDIO", 1),
-    SPEAK("SPEAK", 2),
-    RECORD("RECORD", 3);
+    SPEAK("SPEAK", 2);
 
     private final int priority;
     private final String channelName;

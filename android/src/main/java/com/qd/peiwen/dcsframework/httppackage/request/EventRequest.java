@@ -42,10 +42,11 @@ public class EventRequest extends HttpRequest {
     }
 
     protected RequestBody generateBody() {
-        return new MultipartBody.Builder()
+        RequestBody body = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addPart(generateEventHeaders(), generateEventBody())
                 .build();
+        return body;
     }
 
     protected RequestBody generateEventBody() {

@@ -12,6 +12,7 @@ import com.qd.peiwen.dcsframework.entity.voice.SendEntity;
 import com.qd.peiwen.dcsframework.httppackage.listener.IRequestListener;
 import com.qd.peiwen.dcsframework.httppackage.request.EventRequest;
 import com.qd.peiwen.dcsframework.httppackage.request.VoiceRecognizeRequest;
+import com.qd.peiwen.dcsframework.tools.LogUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +23,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
-
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by nick on 2017/11/23.
@@ -46,10 +47,18 @@ public class HttpManager {
         this.gson = new GsonBuilder().
                 registerTypeAdapter(Directive.class, new DirectiveAdapter()).
                 create();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                LogUtils.e(message);
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         this.httpClient = new OkHttpClient.Builder()
                 .readTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
                 .writeTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
                 .connectTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
+                .addNetworkInterceptor(loggingInterceptor)
                 .build();
     }
 
@@ -69,7 +78,7 @@ public class HttpManager {
                         .request(request)
                         .gson(gson)
                         .uuid(uuid)
-                        .url(eventsUrl())
+                        .url(HttpConfig.eventURL)
                         .listener(listener)
                         .httpClient(httpClient)
                         .headers(HttpConfig.HttpHeaders.SAIYA_LOGID, UUID.randomUUID().toString())
@@ -83,39 +92,37 @@ public class HttpManager {
     }
 
 
-    public void voiceRecognizeRequest(final SendEventCard card, final String sessionid, final IRequestListener listener) {
+    public void voiceRecognizeRequest(final SendEventCard card, final IRequestListener listener) {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
                 SendEntity sendEntity = new SendEntity();
-                sendEntity.setType("text");
-                sendEntity.setSessionid(sessionid);
-                sendEntity.setDeviceid(HttpConfig.deviceID);
                 sendEntity.setText(card.getContent());
-
+                sendEntity.setDeviceid(HttpConfig.deviceID);
+                sendEntity.setSessionid(card.getSessionid());
                 new VoiceRecognizeRequest()
                         .entity(sendEntity)
                         .gson(gson)
                         .listener(listener)
                         .uuid(card.getUuid())
                         .httpClient(httpClient)
-                        .url(HttpConfig.HttpUrls.VOICE_RECOGNIZE_URL)
+                        .url(HttpConfig.voiceRecognizeRRL)
                         .headers(HttpConfig.HttpHeaders.CONTENT_TYPE, HttpConfig.ContentTypes.APPLICATION_JSON)
                         .execute();
             }
         }).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe();
     }
 
-    private String getEndpoint() {
-        if (null == endpoint || "".equals(endpoint)) {
-            endpoint = HttpConfig.HttpUrls.SHEME + HttpConfig.HttpUrls.HOST;
-        }
-        return endpoint;
-    }
-
-    private String eventsUrl() {
-        return getEndpoint() + HttpConfig.HttpUrls.EVENTS;
-    }
+//    private String getEndpoint() {
+//        if (null == endpoint || "".equals(endpoint)) {
+//            endpoint = HttpConfig.HttpUrls.SHEME + HttpConfig.HttpUrls.HOST;
+//        }
+//        return endpoint;
+//    }
+//
+//    private String eventsUrl() {
+//        return getEndpoint() + HttpConfig.HttpUrls.EVENTS;
+//    }
 
     public void release() {
         this.httpClient.dispatcher().cancelAll();
