@@ -24,24 +24,24 @@
     }
 }
 
-- (void)textHInputRequest:(NSString *)uuid deviceid:(NSString *)deviceid sessionid:(NSString *)sessionid content:(NSString *)content{
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content{
     PWHTextInputRequest *request = [[PWHTextInputRequest alloc] init];
     request.uuid = uuid;
     request.content = content;
-    request.deviceid = deviceid;
     request.sessionid = sessionid;
     request.session = self.session;
-    request.url = @"http://27.223.99.143:11181/smartapp/smart/direct";
+    request.deviceid = self.deviceid;
+    request.url = self.voiceRecognizeURL;
     [request excuteRequest];
 }
 
-- (void)textBInputRequest:(NSString *)uuid token:(NSString *)token deviceid:(NSString *)deviceid sessionid:(NSString *)sessionid content:(NSString *)content{
+- (void)textBInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content{
     PWBTextInputRequest *request = [[PWBTextInputRequest alloc] init];
-    request.token = token;
     request.content = content;
-    request.deviceid = deviceid;
+    request.token = self.token;
     request.session = self.session;
-    request.url = @"https://dueros-h2.baidu.com/dcs/v1/events";
+    request.deviceid = self.deviceid;
+    request.url = self.eventURL;
     [request excuteRequest];
 }
 

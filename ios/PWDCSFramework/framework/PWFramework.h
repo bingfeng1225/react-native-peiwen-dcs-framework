@@ -12,7 +12,9 @@
 
 @property (nonatomic,copy) NSString *token;
 @property (nonatomic,copy) NSString *deviceid;
-
+@property (nonatomic,copy) NSString *eventURL;
+@property (nonatomic,copy) NSString *speakDownloadURL;
+@property (nonatomic,copy) NSString *voiceRecognizeURL;
 
 - (void)initFramework;
 

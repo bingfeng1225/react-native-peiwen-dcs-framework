@@ -9,7 +9,7 @@ public class HttpConfig {
     public static String deviceID;
     public static String eventURL;
     public static String speakDownloadURL;
-    public static String voiceRecognizeRRL;
+    public static String voiceRecognizeURL;
 
     public static class HttpTags {
         // 请求event事件TAG

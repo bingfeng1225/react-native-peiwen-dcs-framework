@@ -10,11 +10,16 @@
 
 @interface PWHttpManager : NSObject
 
+@property (nonatomic,copy) NSString *token;
+@property (nonatomic,copy) NSString *deviceid;
+@property (nonatomic,copy) NSString *eventURL;
+@property (nonatomic,copy) NSString *voiceRecognizeURL;
+
 - (void)initManager;
 
-- (void)textHInputRequest:(NSString *)uuid deviceid:(NSString *)deviceid sessionid:(NSString *)sessionid content:(NSString *)content;
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content;
 
-- (void)textBInputRequest:(NSString *)uuid token:(NSString *)token deviceid:(NSString *)deviceid sessionid:(NSString *)sessionid content:(NSString *)content;
+- (void)textBInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content;
 
 
 - (void)releaseManager;

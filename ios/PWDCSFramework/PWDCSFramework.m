@@ -36,6 +36,9 @@ RCT_EXPORT_METHOD(initFramework:(NSDictionary *)param
         self.framework = [[PWFramework alloc] init];
         self.framework.token = [param objectForKey:@"token"];
         self.framework.deviceid = [param objectForKey:@"deviceid"];
+        self.framework.eventURL = [param objectForKey:@"event"];
+        self.framework.speakDownloadURL = [param objectForKey:@"speak"];
+        self.framework.voiceRecognizeURL = [param objectForKey:@"voice"];
         [self.framework initFramework];
     }
 }

@@ -40,6 +40,10 @@
 - (void)initHttpManager{
     if(!self.httpManager){
         self.httpManager = [[PWHttpManager alloc] init];
+        self.httpManager.token = self.token;
+        self.httpManager.deviceid = self.deviceid;
+        self.httpManager.eventURL = self.eventURL;
+        self.httpManager.voiceRecognizeURL = self.voiceRecognizeURL;
         [self.httpManager initManager];
     }
 }
@@ -88,11 +92,11 @@
 }
 
 - (void)sendHTextInputRequest:(NSString *)content{
-    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] deviceid:self.deviceid sessionid:self.uuidManager.lastSession content:content];
+    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession content:content];
 }
 
 - (void)sendBTextInputRequest:(NSString *)uuid content:(NSString *)content{
-   [self.httpManager textBInputRequest:self.uuidManager.activeRequest token:self.token deviceid:self.deviceid sessionid:self.uuidManager.lastSession content:content];
+   [self.httpManager textBInputRequest:uuid  sessionid:self.uuidManager.lastSession content:content];
 }
 
 - (void)dealloc{

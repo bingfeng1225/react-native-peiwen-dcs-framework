@@ -23,7 +23,6 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by nick on 2017/11/23.
@@ -47,18 +46,11 @@ public class HttpManager {
         this.gson = new GsonBuilder().
                 registerTypeAdapter(Directive.class, new DirectiveAdapter()).
                 create();
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-            @Override
-            public void log(String message) {
-                LogUtils.e(message);
-            }
-        });
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         this.httpClient = new OkHttpClient.Builder()
                 .readTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
                 .writeTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
                 .connectTimeout(HttpConfig.TimeOut.HTTP_DEFAULT, TimeUnit.MILLISECONDS)
-                .addNetworkInterceptor(loggingInterceptor)
                 .build();
     }
 
@@ -106,7 +98,7 @@ public class HttpManager {
                         .listener(listener)
                         .uuid(card.getUuid())
                         .httpClient(httpClient)
-                        .url(HttpConfig.voiceRecognizeRRL)
+                        .url(HttpConfig.voiceRecognizeURL)
                         .headers(HttpConfig.HttpHeaders.CONTENT_TYPE, HttpConfig.ContentTypes.APPLICATION_JSON)
                         .execute();
             }

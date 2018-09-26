@@ -51,7 +51,7 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
         HttpConfig.eventURL = map.getString("event");
         HttpConfig.deviceID = map.getString("deviceid");
         HttpConfig.speakDownloadURL = map.getString("speak");
-        HttpConfig.voiceRecognizeRRL = map.getString("voice");
+        HttpConfig.voiceRecognizeURL = map.getString("voice");
         if(null == this.framework) {
             this.framework = new DCSFramework(this.context);
             this.framework.setListener(this);
