@@ -6,8 +6,12 @@
 //  Copyright © 2018年 hisense. All rights reserved.
 //
 
-#import "PWBaseModule.h"
+
 #import "PWModuleManager.h"
+#import "PWScreenModule.h"
+#import "PWSystemModule.h"
+#import "PWVoiceRecognizeModule.h"
+#import "PWSpeakControllerModule.h"
 
 @interface PWModuleManager ()
 @property (nonatomic,strong) NSMutableDictionary *modules;
@@ -20,17 +24,17 @@
     if(self = [super init]){
         //TODO 创建各个端能力对象并加入字典
         self.modules = [NSMutableDictionary dictionary];
-        self.base1 = [[PWBaseModule alloc] init];
-        self.base1.nameSpace = @"base1";
-        [self.modules setObject:self.base1 forKey:self.base1.nameSpace];
+        self.screenModule = [[PWScreenModule alloc] init];
+        [self.modules setObject:self.screenModule forKey:self.screenModule.nameSpace];
         
-        self.base2 = [[PWBaseModule alloc] init];
-        self.base2.nameSpace = @"base2";
-        [self.modules setObject:self.base2 forKey:self.base2.nameSpace];
+        self.systemModule = [[PWSystemModule alloc] init];
+        [self.modules setObject:self.systemModule forKey:self.systemModule.nameSpace];
+
+        self.voiceRecognizeModule = [[PWVoiceRecognizeModule alloc] init];
+        [self.modules setObject:self.voiceRecognizeModule forKey:self.voiceRecognizeModule.nameSpace];
         
-        self.base3 = [[PWBaseModule alloc] init];
-        self.base3.nameSpace = @"base3";
-        [self.modules setObject:self.base3 forKey:self.base3.nameSpace];
+//        self.speakControllerModule = [[PWSpeakControllerModule alloc] init];
+//        [self.modules setObject:self.speakControllerModule forKey:self.speakControllerModule.nameSpace];
     }
     return self;
 }
@@ -42,8 +46,13 @@
     }
 }
 
-- (void)processMessage:(id)message{
+- (void)processDirective:(NSDictionary *)directive{
+    NSDictionary *payload = directive[@"payload"];
+    NSString *name = directive[@"header"][@"name"];
+    NSString *namespace = directive[@"header"][@"namespace"];
     
+    PWBaseModule *module = [self.modules objectForKey:namespace];
+    [module process:name payload:payload];
 }
 
 - (void)releaseManager{

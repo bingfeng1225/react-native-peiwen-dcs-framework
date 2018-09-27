@@ -17,10 +17,9 @@
 
 - (void)initManager;
 
-- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content;
+- (void)textBInputRequest:(NSString *)uuid content:(NSString *)content delegate:(id)delegate;
 
-- (void)textBInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content;
-
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content delegate:(id)delegate;
 
 - (void)releaseManager;
 

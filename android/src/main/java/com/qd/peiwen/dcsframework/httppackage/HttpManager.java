@@ -84,14 +84,14 @@ public class HttpManager {
     }
 
 
-    public void voiceRecognizeRequest(final SendEventCard card, final IRequestListener listener) {
+    public void voiceRecognizeRequest(final SendEventCard card,final String sessionid, final IRequestListener listener) {
         Observable.create(new ObservableOnSubscribe<Object>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Object> e) throws Exception {
                 SendEntity sendEntity = new SendEntity();
+                sendEntity.setSessionid(sessionid);
                 sendEntity.setText(card.getContent());
                 sendEntity.setDeviceid(HttpConfig.deviceID);
-                sendEntity.setSessionid(card.getSessionid());
                 new VoiceRecognizeRequest()
                         .entity(sendEntity)
                         .gson(gson)

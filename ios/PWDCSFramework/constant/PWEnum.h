@@ -5,8 +5,8 @@
 //  Created by Nick on 2017/4/15.
 //  Copyright © 2017年 PicoVR. All rights reserved.
 //
-#ifndef PWEXEnum_h
-#define PWEXEnum_h
+#ifndef PWEnum_h
+#define PWEnum_h
 
 #import <Foundation/Foundation.h>
 
@@ -49,4 +49,24 @@ typedef NS_ENUM(NSInteger, PWChannelType) {
 };
 
 
-#endif /* PWEXEnum_h */
+/**
+ *  通道类型
+ *
+ *  peiwen
+ */
+typedef NS_ENUM(NSInteger, PWReactEventType) {
+    TEXT_INPUT_STARTED,
+    TEXT_INPUT_FAILURED,
+    INPUT_EVENT_SUCCESSED,
+    VOICE_RECOGNIZE_STARTED,
+    VOICE_RECOGNIZE_FAILURED,
+    VOICE_RECOGNIZE_SUCCESSED,
+    ON_RECEIVE_TEXT_CARD,
+    ON_RECEIVE_LIST_CARD,
+    ON_RECEIVE_SERVICE_CARD,
+    ON_RECEIVE_STANDARD_CARD,
+    ON_RECEIVE_IMAGE_LIST_CARD,
+    ON_RECEIVE_SERVICE_LIST_CARD,
+};
+
+#endif /* PWEnum_h */

@@ -83,7 +83,7 @@ public class DCSFramework implements
         ITicketModuleListener {
 
     private Context context;
-    private String lastSessionid;
+    private String lastSessionid = "";
     private HttpManager httpManager;
     private DeviceManager deviceManager;
     private VolumeManager volumeManager;
@@ -174,8 +174,7 @@ public class DCSFramework implements
     }
 
     public void sendVoiceRecognizeRequest(SendEventCard card) {
-        card.setSessionid(this.lastSessionid);
-        httpManager.voiceRecognizeRequest(card, new VoiceRecognizeListener(card));
+        httpManager.voiceRecognizeRequest(card,this.lastSessionid, new VoiceRecognizeListener(card));
     }
 
     public void sendTextInputEvent(VoiceRecognizePayload payload) {

@@ -9,17 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @protocol PWMessageQueueDelegate <NSObject>
-- (void)processMessage:(id)message;
+- (void)processDirective:(NSDictionary *)directive;
 @end
 
 @interface PWMessageQueue : NSObject
 
-@property (nonatomic,weak) id<PWMessageQueueDelegate> messageQueueDelegate;
+@property (nonatomic,weak) id<PWMessageQueueDelegate> delegate;
 
 - (void)initQueue;
 
 - (void)releaseQueue;
 
-- (void)insertMessage:(id)message;
+- (void)processDirective:(NSDictionary *)directive;
 
 @end

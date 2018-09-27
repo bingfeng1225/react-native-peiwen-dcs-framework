@@ -12,6 +12,7 @@
 @interface PWChannelParameters ()
 
 @property (nonatomic,assign) PWChannelType channelType;
+
 @property (nonatomic,strong) NSMutableArray *channelStates;
 
 @end

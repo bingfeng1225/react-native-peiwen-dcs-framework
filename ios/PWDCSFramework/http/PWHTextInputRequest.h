@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PWHTextInputRequestDelegate
+@protocol PWHTextInputRequestDelegate <NSObject>
 
 - (void)onHTextInputStarted:(NSString *)uuid content:(NSString *)content;
 
@@ -26,6 +26,7 @@
 @property (nonatomic,copy) NSString *deviceid;
 @property (nonatomic,copy) NSString *sessionid;
 @property (nonatomic,weak) NSURLSession *session;
+@property (nonatomic,weak) id<PWHTextInputRequestDelegate> delegate;
 
 - (void)excuteRequest;
 

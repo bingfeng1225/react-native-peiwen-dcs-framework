@@ -15,7 +15,8 @@
 
 - (void)initModule;
 
-- (void)processMessage:(id)message;
+
+- (void)process:(NSString *)name payload:(NSDictionary *)payload;
 
 - (void)releaseModule;
 

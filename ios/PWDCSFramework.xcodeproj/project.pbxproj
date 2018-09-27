@@ -18,6 +18,11 @@
 		01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DC92154DB4C00F773E4 /* PWMessageQueue.m */; };
 		014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 014538E6214B564F00E792AF /* PWDCSFramework.m */; };
 		014538E8214B564F00E792AF /* PWDCSFramework.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 014538E5214B564F00E792AF /* PWDCSFramework.h */; };
+		0161C0C2215B7F930041581C /* PWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0C1215B7F930041581C /* PWConstants.m */; };
+		0161C0CB215B90170041581C /* PWScreenModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0CA215B90170041581C /* PWScreenModule.m */; };
+		0161C0CE215B902F0041581C /* PWSystemModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0CD215B902F0041581C /* PWSystemModule.m */; };
+		0161C0D1215B90570041581C /* PWSpeakControllerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0D0215B90570041581C /* PWSpeakControllerModule.m */; };
+		0161C0D4215B90750041581C /* PWVoiceRecognizeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0D3215B90750041581C /* PWVoiceRecognizeModule.m */; };
 		01913E38215888D300D0EFF4 /* PWFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E37215888D300D0EFF4 /* PWFramework.m */; };
 		01913E3C2158D15F00D0EFF4 /* PWHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E3B2158D15F00D0EFF4 /* PWHttpManager.m */; };
 		01913E3F2158D87C00D0EFF4 /* PWHTextInputRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 01913E3E2158D87C00D0EFF4 /* PWHTextInputRequest.m */; };
@@ -41,7 +46,7 @@
 		012ECB15215B1B7E00B22CA8 /* PWUUIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWUUIDManager.h; sourceTree = "<group>"; };
 		012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWUUIDManager.m; sourceTree = "<group>"; };
 		01335DA62154874800F773E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		01335DAF2154881D00F773E4 /* PWPlayerEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWPlayerEnum.h; sourceTree = "<group>"; };
+		01335DAF2154881D00F773E4 /* PWEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PWEnum.h; sourceTree = "<group>"; };
 		01335DB121548C1600F773E4 /* PWChannelPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelPlayer.h; sourceTree = "<group>"; };
 		01335DB221548C1600F773E4 /* PWChannelPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChannelPlayer.m; sourceTree = "<group>"; };
 		01335DB421548C2F00F773E4 /* PWChannelParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChannelParameters.h; sourceTree = "<group>"; };
@@ -59,6 +64,16 @@
 		014538E2214B564F00E792AF /* libPWDCSFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPWDCSFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		014538E5214B564F00E792AF /* PWDCSFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDCSFramework.h; sourceTree = "<group>"; };
 		014538E6214B564F00E792AF /* PWDCSFramework.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDCSFramework.m; sourceTree = "<group>"; };
+		0161C0C0215B7F930041581C /* PWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWConstants.h; sourceTree = "<group>"; };
+		0161C0C1215B7F930041581C /* PWConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWConstants.m; sourceTree = "<group>"; };
+		0161C0C9215B90170041581C /* PWScreenModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWScreenModule.h; sourceTree = "<group>"; };
+		0161C0CA215B90170041581C /* PWScreenModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWScreenModule.m; sourceTree = "<group>"; };
+		0161C0CC215B902F0041581C /* PWSystemModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWSystemModule.h; sourceTree = "<group>"; };
+		0161C0CD215B902F0041581C /* PWSystemModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWSystemModule.m; sourceTree = "<group>"; };
+		0161C0CF215B90570041581C /* PWSpeakControllerModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWSpeakControllerModule.h; sourceTree = "<group>"; };
+		0161C0D0215B90570041581C /* PWSpeakControllerModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWSpeakControllerModule.m; sourceTree = "<group>"; };
+		0161C0D2215B90750041581C /* PWVoiceRecognizeModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWVoiceRecognizeModule.h; sourceTree = "<group>"; };
+		0161C0D3215B90750041581C /* PWVoiceRecognizeModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWVoiceRecognizeModule.m; sourceTree = "<group>"; };
 		01913E36215888D300D0EFF4 /* PWFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWFramework.h; sourceTree = "<group>"; };
 		01913E37215888D300D0EFF4 /* PWFramework.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWFramework.m; sourceTree = "<group>"; };
 		01913E3A2158D15F00D0EFF4 /* PWHttpManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWHttpManager.h; sourceTree = "<group>"; };
@@ -101,7 +116,6 @@
 		01335DAC2154881D00F773E4 /* musicplayer */ = {
 			isa = PBXGroup;
 			children = (
-				01335DAF2154881D00F773E4 /* PWPlayerEnum.h */,
 				01335DB121548C1600F773E4 /* PWChannelPlayer.h */,
 				01335DB221548C1600F773E4 /* PWChannelPlayer.m */,
 				01335DB421548C2F00F773E4 /* PWChannelParameters.h */,
@@ -117,6 +131,12 @@
 		01335DBD2154C27000F773E4 /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				0161C0C6215B8F960041581C /* screen */,
+				0161C0C3215B8F580041581C /* system */,
+				0161C0C4215B8F7D0041581C /* voiceoutput */,
+				0161C0C5215B8F8B0041581C /* audioplayer */,
+				0161C0C7215B8FB70041581C /* speakcontroller */,
+				0161C0C8215B8FCF0041581C /* voicerecognize */,
 				01335DBE2154C35000F773E4 /* PWModuleManager.h */,
 				01335DBF2154C35000F773E4 /* PWModuleManager.m */,
 				01335DC12154C36000F773E4 /* PWBaseModule.h */,
@@ -154,6 +174,7 @@
 		014538E4214B564F00E792AF /* PWDCSFramework */ = {
 			isa = PBXGroup;
 			children = (
+				0161C0BF215B7F750041581C /* constant */,
 				012ECB14215B1B6E00B22CA8 /* uuid */,
 				01913E392158D14300D0EFF4 /* http */,
 				01913E35215888C300D0EFF4 /* framework */,
@@ -164,6 +185,66 @@
 				014538E6214B564F00E792AF /* PWDCSFramework.m */,
 			);
 			path = PWDCSFramework;
+			sourceTree = "<group>";
+		};
+		0161C0BF215B7F750041581C /* constant */ = {
+			isa = PBXGroup;
+			children = (
+				01335DAF2154881D00F773E4 /* PWEnum.h */,
+				0161C0C0215B7F930041581C /* PWConstants.h */,
+				0161C0C1215B7F930041581C /* PWConstants.m */,
+			);
+			path = constant;
+			sourceTree = "<group>";
+		};
+		0161C0C3215B8F580041581C /* system */ = {
+			isa = PBXGroup;
+			children = (
+				0161C0CC215B902F0041581C /* PWSystemModule.h */,
+				0161C0CD215B902F0041581C /* PWSystemModule.m */,
+			);
+			path = system;
+			sourceTree = "<group>";
+		};
+		0161C0C4215B8F7D0041581C /* voiceoutput */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = voiceoutput;
+			sourceTree = "<group>";
+		};
+		0161C0C5215B8F8B0041581C /* audioplayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = audioplayer;
+			sourceTree = "<group>";
+		};
+		0161C0C6215B8F960041581C /* screen */ = {
+			isa = PBXGroup;
+			children = (
+				0161C0C9215B90170041581C /* PWScreenModule.h */,
+				0161C0CA215B90170041581C /* PWScreenModule.m */,
+			);
+			path = screen;
+			sourceTree = "<group>";
+		};
+		0161C0C7215B8FB70041581C /* speakcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				0161C0CF215B90570041581C /* PWSpeakControllerModule.h */,
+				0161C0D0215B90570041581C /* PWSpeakControllerModule.m */,
+			);
+			path = speakcontroller;
+			sourceTree = "<group>";
+		};
+		0161C0C8215B8FCF0041581C /* voicerecognize */ = {
+			isa = PBXGroup;
+			children = (
+				0161C0D2215B90750041581C /* PWVoiceRecognizeModule.h */,
+				0161C0D3215B90750041581C /* PWVoiceRecognizeModule.m */,
+			);
+			path = voicerecognize;
 			sourceTree = "<group>";
 		};
 		01913E35215888C300D0EFF4 /* framework */ = {
@@ -245,17 +326,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				01335DB621548C2F00F773E4 /* PWChannelParameters.m in Sources */,
+				0161C0D1215B90570041581C /* PWSpeakControllerModule.m in Sources */,
 				01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */,
 				01913E3F2158D87C00D0EFF4 /* PWHTextInputRequest.m in Sources */,
 				014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */,
 				01335DC02154C35000F773E4 /* PWModuleManager.m in Sources */,
+				0161C0D4215B90750041581C /* PWVoiceRecognizeModule.m in Sources */,
 				01913E38215888D300D0EFF4 /* PWFramework.m in Sources */,
 				012ECB17215B1B7E00B22CA8 /* PWUUIDManager.m in Sources */,
 				01913E3C2158D15F00D0EFF4 /* PWHttpManager.m in Sources */,
 				01335DC32154C36000F773E4 /* PWBaseModule.m in Sources */,
 				01335DB921548EAE00F773E4 /* PWChannelState.m in Sources */,
+				0161C0C2215B7F930041581C /* PWConstants.m in Sources */,
 				01335DBC2154944B00F773E4 /* PWChannelManager.m in Sources */,
 				01335DB321548C1600F773E4 /* PWChannelPlayer.m in Sources */,
+				0161C0CE215B902F0041581C /* PWSystemModule.m in Sources */,
+				0161C0CB215B90170041581C /* PWScreenModule.m in Sources */,
 				01913E422158D89000D0EFF4 /* PWBTextInputRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

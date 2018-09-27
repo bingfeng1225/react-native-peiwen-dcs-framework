@@ -6,7 +6,11 @@
 //  Copyright © 2018年 hisense. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "PWEnum.h"
+
+@protocol PWFrameworkDelegate <NSObject>
+- (void)sendEvent:(PWReactEventType)type content:(NSString *)content;
+@end
 
 @interface PWFramework : NSObject
 
@@ -15,12 +19,11 @@
 @property (nonatomic,copy) NSString *eventURL;
 @property (nonatomic,copy) NSString *speakDownloadURL;
 @property (nonatomic,copy) NSString *voiceRecognizeURL;
+@property (nonatomic,weak) id<PWFrameworkDelegate> delegate;
 
 - (void)initFramework;
 
 - (void)sendHTextInputRequest:(NSString *)content;
-
-- (void)sendBTextInputRequest:(NSString *)uuid content:(NSString *)content;
 
 - (void)releaseFramework;
 @end

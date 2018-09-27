@@ -8,10 +8,13 @@
 
 #if __has_include(<React/RCTAssert.h>)
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 #else
 #import "RCTBridgeModule.h"
+#import "RCTEventEmitter.h"
 #endif
 
-@interface PWDCSFramework : NSObject <RCTBridgeModule>
+
+@interface PWDCSFramework : RCTEventEmitter
 
 @end

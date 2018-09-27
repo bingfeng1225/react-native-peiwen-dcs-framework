@@ -6,7 +6,7 @@
 //  Copyright © 2018年 hisense. All rights reserved.
 //
 
-#import "PWPlayerEnum.h"
+#import "PWEnum.h"
 
 @interface PWChannelParameters : NSObject
 @property (nonatomic,strong) id playObject;

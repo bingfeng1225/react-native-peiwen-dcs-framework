@@ -8,7 +8,6 @@ public class SendEventCard {
     private String uuid;
     private String content;
     private long timestamp;
-    private String sessionid;
 
     public SendEventCard() {
 
@@ -36,13 +35,5 @@ public class SendEventCard {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public String getSessionid() {
-        return sessionid;
-    }
-
-    public void setSessionid(String sessionid) {
-        this.sessionid = sessionid;
     }
 }

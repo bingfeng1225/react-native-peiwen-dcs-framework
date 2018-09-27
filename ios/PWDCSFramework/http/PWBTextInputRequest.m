@@ -23,13 +23,14 @@
 }
 
 - (void)excuteRequest{
+    [self fireBTextInputStarted];
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:[self httpRequest:[self requestParameters]] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if(error){
-            //TODO 错误回调
-            return;
+            [self fireBTextInputFailured];
+        }else{
+            [self parseResponse:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
+            [self fireBTextInputSuccessed];
         }
-        [self parseResponse:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]];
-        //TODO 结束回调
     }];
     [task resume];
 }
@@ -44,11 +45,35 @@
 - (void)parsePartResponse:(NSString *)part{
     NSError *error = nil;
     NSData *data = [part dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
-    if(jsonObject && !error){
+    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    if(!error && response){
         NSLog(@"%@",part);
-        [self.directives addObject:jsonObject];
+        NSDictionary *directive = [self availableResponse:response];
+        if(directive){
+            [self.directives addObject:directive];
+        }
     }
+}
+
+
+- (NSDictionary *)availableResponse:(NSDictionary *)response{
+    NSDictionary *directive = [response objectForKey:@"directive"];
+    if(!directive){
+        return nil;
+    }
+    NSDictionary *header = [directive objectForKey:@"header"];
+    NSDictionary *payload = [directive objectForKey:@"payload"];
+    if(!header || !payload){
+        return nil;
+    }
+    
+    NSMutableDictionary *exdirective = [NSMutableDictionary dictionary];
+    NSMutableDictionary *expayload = [NSMutableDictionary dictionaryWithDictionary:payload];
+    [expayload setObject:self.uuid forKey:@"uuid"];
+    
+    [exdirective setObject:header forKey:@"header"];
+    [exdirective setObject:expayload forKey:@"payload"];
+    return exdirective;
 }
 
 - (NSDictionary *)requestParameters{
@@ -93,6 +118,21 @@
 }
 
 
+- (void)fireBTextInputStarted{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(onBTextInputStarted:content:)]){
+        [self.delegate onBTextInputStarted:self.uuid content:self.content];
+    }
+}
+- (void)fireBTextInputFailured{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(onBTextInputFailured:)]){
+        [self.delegate onBTextInputFailured:self.uuid];
+    }
+}
+- (void)fireBTextInputSuccessed{
+    if(self.delegate && [self.delegate respondsToSelector:@selector(onBTextInputSuccessed:directives:)]){
+        [self.delegate onBTextInputSuccessed:self.uuid directives:self.directives];
+    }
+}
 
 - (void)dealloc{
     NSLog(@"PWBTextInputRequest dealloc");

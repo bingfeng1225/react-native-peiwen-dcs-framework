@@ -14,8 +14,8 @@
     
 }
 
-- (void)processMessage:(id)message{
-    
+- (void)process:(NSString *)name payload:(NSDictionary *)payload{
+    [self doesNotRecognizeSelector:@selector(process:payload:)];
 }
 
 - (void)releaseModule{

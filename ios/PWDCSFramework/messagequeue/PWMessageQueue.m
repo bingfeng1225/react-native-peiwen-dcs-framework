@@ -28,14 +28,14 @@
     }
 }
 
-- (void)insertMessage:(id)message{
-    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(processOperation:) object:message];
+- (void)processDirective:(NSDictionary *)directive{
+    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(processOperation:) object:directive];
     [self.queue addOperation:operation];
 }
 
-- (void)processOperation:(id)message {
-    if(self.messageQueueDelegate && [self.messageQueueDelegate respondsToSelector:@selector(processMessage:)]){
-        [self.messageQueueDelegate processMessage:message];
+- (void)processOperation:(NSDictionary *)directive {
+    if(self.delegate && [self.delegate respondsToSelector:@selector(processDirective:)]){
+        [self.delegate processDirective:directive];
     }
 }
 

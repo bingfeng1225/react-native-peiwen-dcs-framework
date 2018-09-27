@@ -20,7 +20,7 @@
 }
 
 - (BOOL)isActiveRequest:(NSString *)uuid{
-    return ([uuid compare:self.activeRequest] == NSOrderedSame);
+    return [uuid isEqualToString:self.activeRequest];
 }
 
 - (void)releaseManager{

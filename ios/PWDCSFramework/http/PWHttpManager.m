@@ -24,24 +24,27 @@
     }
 }
 
-- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content{
+- (void)textBInputRequest:(NSString *)uuid content:(NSString *)content delegate:(id)delegate{
+    PWBTextInputRequest *request = [[PWBTextInputRequest alloc] init];
+    request.uuid = uuid;
+    request.content = content;
+    request.token = self.token;
+    request.delegate = delegate;
+    request.session = self.session;
+    request.deviceid = self.deviceid;
+    request.url = self.eventURL;
+    [request excuteRequest];
+}
+
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content delegate:(id)delegate{
     PWHTextInputRequest *request = [[PWHTextInputRequest alloc] init];
     request.uuid = uuid;
     request.content = content;
+    request.delegate = delegate;
     request.sessionid = sessionid;
     request.session = self.session;
     request.deviceid = self.deviceid;
     request.url = self.voiceRecognizeURL;
-    [request excuteRequest];
-}
-
-- (void)textBInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content{
-    PWBTextInputRequest *request = [[PWBTextInputRequest alloc] init];
-    request.content = content;
-    request.token = self.token;
-    request.session = self.session;
-    request.deviceid = self.deviceid;
-    request.url = self.eventURL;
     [request excuteRequest];
 }
 

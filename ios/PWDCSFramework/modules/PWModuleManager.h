@@ -8,16 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@class PWBaseModule;
+@class PWScreenModule;
+@class PWSystemModule;
+@class PWVoiceRecognizeModule;
+@class PWSpeakControllerModule;
 @interface PWModuleManager : NSObject
 
-@property (nonatomic,strong) PWBaseModule *base1;
-@property (nonatomic,strong) PWBaseModule *base2;
-@property (nonatomic,strong) PWBaseModule *base3;
+@property (nonatomic,strong) PWScreenModule *screenModule;
+@property (nonatomic,strong) PWSystemModule *systemModule;
+@property (nonatomic,strong) PWVoiceRecognizeModule *voiceRecognizeModule;
+@property (nonatomic,strong) PWSpeakControllerModule *speakControllerModule;
 
 - (void)initManager;
 
-- (void)processMessage:(id)message;
+- (void)processDirective:(NSDictionary *)directive;
 
 - (void)releaseManager;
 
