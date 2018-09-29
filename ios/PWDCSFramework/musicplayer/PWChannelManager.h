@@ -26,16 +26,16 @@
 
 - (void)audioRecordFinished;
 
-- (void)dialogChannelReleased;
-
 - (void)dialogChannelOccupied;
 
-- (void)speakChannelReleased;
+- (void)dialogChannelReleased;
 
 - (void)speakChannelOccupied;
 
-- (void)audioChannelReleased;
+- (void)speakChannelReleased;
 
 - (void)audioChannelOccupied;
+
+- (void)audioChannelReleased;
 
 @end

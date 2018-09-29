@@ -126,7 +126,26 @@ public class ChannelManager {
             player.channelStateChanged(ChannelType.AUDIO, true);
         }
     }
-    
+
+    public synchronized void audioFocusLossed() {
+        LogUtils.e("audioFocusLossed----------------");
+        if (null == this.players) {
+            return;
+        }
+        for (ChannelPlayer player : this.players.values()) {
+            player.audioFocusLossed();
+        }
+    }
+
+    public synchronized void audioFocusGranted() {
+        LogUtils.e("audioFocusGranted----------------");
+        if (null == this.players) {
+            return;
+        }
+        for (ChannelPlayer player : this.players.values()) {
+            player.audioFocusGranted();
+        }
+    }
 
     public void release() {
         this.players = null;

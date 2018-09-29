@@ -52,11 +52,7 @@
     }
 }
 
-- (void)dialogChannelReleased{
-    for (PWChannelPlayer *player in self.players) {
-        [player dialogChannelReleased];
-    }
-}
+
 
 - (void)dialogChannelOccupied{
     for (PWChannelPlayer *player in self.players) {
@@ -64,27 +60,34 @@
     }
 }
 
-- (void)speakChannelReleased{
+- (void)dialogChannelReleased{
     for (PWChannelPlayer *player in self.players) {
-        [player speakChannelReleased];
+        [player dialogChannelReleased];
     }
 }
 
 - (void)speakChannelOccupied{
     for (PWChannelPlayer *player in self.players) {
-        [player speakChannelOccupied];
+        [player channelStateChanged:PW_CHANNEL_SPEAK occupied:YES];
+    }
+}
+
+- (void)speakChannelReleased{
+    for (PWChannelPlayer *player in self.players) {
+        [player channelStateChanged:PW_CHANNEL_SPEAK occupied:NO];
+    }
+}
+
+
+- (void)audioChannelOccupied{
+    for (PWChannelPlayer *player in self.players) {
+        [player channelStateChanged:PW_CHANNEL_AUDIO occupied:YES];
     }
 }
 
 - (void)audioChannelReleased{
     for (PWChannelPlayer *player in self.players) {
-        [player audioChannelReleased];
-    }
-}
-
-- (void)audioChannelOccupied{
-    for (PWChannelPlayer *player in self.players) {
-        [player audioChannelOccupied];
+        [player channelStateChanged:PW_CHANNEL_AUDIO occupied:NO];
     }
 }
 

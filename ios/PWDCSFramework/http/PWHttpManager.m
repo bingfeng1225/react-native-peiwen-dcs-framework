@@ -36,11 +36,12 @@
     [request excuteRequest];
 }
 
-- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content delegate:(id)delegate{
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid location:(NSString *)location content:(NSString *)content delegate:(id)delegate{
     PWHTextInputRequest *request = [[PWHTextInputRequest alloc] init];
     request.uuid = uuid;
     request.content = content;
     request.delegate = delegate;
+    request.location = location;
     request.sessionid = sessionid;
     request.session = self.session;
     request.deviceid = self.deviceid;

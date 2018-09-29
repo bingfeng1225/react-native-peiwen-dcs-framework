@@ -5,6 +5,10 @@ package com.qd.peiwen.dcsframework.volume;
  */
 
 public interface IVolumeListener {
+    void onAudioFocusLossed();
+
+    void onAudioFocusGranted();
+
     void onMuteChanged(int volume);
 
     void onVolumeChanged(int volume);

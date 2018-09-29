@@ -105,8 +105,8 @@
     [self.httpManager textBInputRequest:uuid content:content delegate:self];
 }
 
-- (void)sendHTextInputRequest:(NSString *)content{
-    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession content:content delegate:self];
+- (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location{
+    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession location:location content:content delegate:self];
 }
 
 #pragma mark PWPWMessageQueueDelegate

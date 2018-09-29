@@ -6,6 +6,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.text.TextUtils;
 
+
 import com.qd.peiwen.dcsframework.musicplayer.enmudefine.ChannelType;
 import com.qd.peiwen.dcsframework.musicplayer.enmudefine.ErrorType;
 import com.qd.peiwen.dcsframework.musicplayer.enmudefine.PlayerState;
@@ -219,6 +220,28 @@ public class ChannelPlayer implements
         this.setPlayerState(PlayerState.PLAYER_IDLE);
     }
 
+    public void rewind() {
+        if (this.canSeek()) {
+            int cur = mediaPlayer.getCurrentPosition();
+            if (cur > 5 * 1000) {
+                seekToTime((cur - 5 * 1000));
+            } else {
+                seekToTime(0);
+            }
+        }
+    }
+
+    public void fastForward() {
+        if (this.canSeek()) {
+            int cur = mediaPlayer.getCurrentPosition();
+            int total = mediaPlayer.getDuration();
+            if (total - cur > 5 * 1000) {
+                seekToTime((cur + 5 * 1000));
+            } else {
+                seekToTime(total);
+            }
+        }
+    }
 
     public void seekToTime(int msec) {
         if (this.canSeek()) {
@@ -226,6 +249,34 @@ public class ChannelPlayer implements
         }
     }
 
+    public void pause() {
+        if (!this.parameters.pauseByUser) {
+            this.parameters.pauseByUser = true;
+            this.parametersChanged();
+        }
+    }
+
+    public void resume() {
+        if (!this.parameters.pauseByUser) {
+            this.parameters.pauseByUser = false;
+            this.parametersChanged();
+        }
+    }
+
+
+    public void audioFocusLossed() {
+        if (!this.parameters.audioFocusLossed) {
+            this.parameters.audioFocusLossed = true;
+            this.parametersChanged();
+        }
+    }
+
+    public void audioFocusGranted() {
+        if (this.parameters.audioFocusLossed) {
+            this.parameters.audioFocusLossed = false;
+            this.parametersChanged();
+        }
+    }
 
     public void enterBackground() {
         if (!this.parameters.enterBackground) {
@@ -318,9 +369,7 @@ public class ChannelPlayer implements
     @Override
     public void onPrepared(MediaPlayer mp) {
         this.setPlayerState(PlayerState.PLAYER_PREPARED);
-        if (this.seekTime > 0) {
-            this.seekToTime(this.seekTime);
-        }
+        this.seekToTime(this.seekTime);
         parameters.duration = mediaPlayer.getDuration();
         parameters.position = this.seekTime;
         if (this.parameters.isConditionsMeetRequirements()) {

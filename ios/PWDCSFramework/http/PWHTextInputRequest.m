@@ -81,6 +81,7 @@
              @"text":self.content,
              @"token":@"access_token",
              @"deviceid":self.deviceid,
+             @"location":self.location,
              @"sessionid":self.sessionid
              };
 }

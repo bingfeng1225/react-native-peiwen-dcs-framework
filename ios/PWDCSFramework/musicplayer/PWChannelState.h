@@ -10,7 +10,8 @@
 
 @interface PWChannelState : NSObject
 
+@property (nonatomic,assign) BOOL channelOccupied;
 @property (nonatomic,assign) PWChannelType channelType;
-@property (nonatomic,assign) PWChannelType channelOccupied;
 -(instancetype)initWithChannelType:(PWChannelType) channelType;
+
 @end

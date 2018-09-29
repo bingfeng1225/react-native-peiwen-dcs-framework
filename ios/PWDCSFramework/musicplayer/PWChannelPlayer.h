@@ -8,7 +8,13 @@
 
 #import "PWEnum.h"
 
+@protocol PWChannelPlayerDelegate
+
+@end
+
 @interface PWChannelPlayer : NSObject
+
+@property (nonatomic,weak) id<PWChannelPlayerDelegate> delegate;
 
 - (instancetype)initWithChannelType:(PWChannelType) channelType;
 
@@ -20,16 +26,10 @@
 
 - (void)audioRecordFinished;
 
-- (void)dialogChannelReleased;
-
 - (void)dialogChannelOccupied;
 
-- (void)speakChannelReleased;
+- (void)dialogChannelReleased;
 
-- (void)speakChannelOccupied;
-
-- (void)audioChannelReleased;
-
-- (void)audioChannelOccupied;
+- (void)channelStateChanged:(PWChannelType)type occupied:(BOOL)occupied;
 
 @end

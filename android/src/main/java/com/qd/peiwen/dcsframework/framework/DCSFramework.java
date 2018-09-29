@@ -173,8 +173,8 @@ public class DCSFramework implements
         deviceManager.smsModule().sendMessage(phone, content);
     }
 
-    public void sendVoiceRecognizeRequest(SendEventCard card) {
-        httpManager.voiceRecognizeRequest(card,this.lastSessionid, new VoiceRecognizeListener(card));
+    public void sendVoiceRecognizeRequest(SendEventCard card,String localtion) {
+        httpManager.voiceRecognizeRequest(card,this.lastSessionid,localtion, new VoiceRecognizeListener(card));
     }
 
     public void sendTextInputEvent(VoiceRecognizePayload payload) {
@@ -496,6 +496,16 @@ public class DCSFramework implements
     public void onVolumeChanged(int volume) {
         DCSRequest request = deviceManager.volumeChangedRequest(volume, (volume == 0));
         httpManager.eventRequest(request, new EventListener());
+    }
+
+    @Override
+    public void onAudioFocusLossed() {
+        this.channelManager.audioFocusLossed();
+    }
+
+    @Override
+    public void onAudioFocusGranted() {
+        this.channelManager.audioFocusGranted();
     }
 
     /************************ Listener分发方法 **********************************/

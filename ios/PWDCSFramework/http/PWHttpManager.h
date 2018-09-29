@@ -19,7 +19,7 @@
 
 - (void)textBInputRequest:(NSString *)uuid content:(NSString *)content delegate:(id)delegate;
 
-- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid content:(NSString *)content delegate:(id)delegate;
+- (void)textHInputRequest:(NSString *)uuid sessionid:(NSString *)sessionid location:(NSString *)location content:(NSString *)content delegate:(id)delegate;
 
 - (void)releaseManager;
 

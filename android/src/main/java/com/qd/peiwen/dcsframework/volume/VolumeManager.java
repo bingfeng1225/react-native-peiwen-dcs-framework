@@ -12,7 +12,7 @@ import java.lang.ref.WeakReference;
  * Created by jeffreyliu on 16/12/8.
  */
 
-public class VolumeManager {
+public class VolumeManager implements AudioManager.OnAudioFocusChangeListener {
     private int volume = 0;
     private int maxVolume = 0;
     private Context context = null;
@@ -29,6 +29,7 @@ public class VolumeManager {
         this.maxVolume = this.getMaxVolume();
         this.volume = getVolume();
         this.registerVolumeListener();
+        this.registerAudioFocusListener();
     }
 
 
@@ -96,6 +97,13 @@ public class VolumeManager {
         context.unregisterReceiver(this.volumeBroadcastReceiver);
     }
 
+    private void registerAudioFocusListener() {
+        audioManager.requestAudioFocus(this, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN);
+    }
+
+    private void unregisterAudioFocusListener() {
+        audioManager.abandonAudioFocus(this);
+    }
 
     private void fireMuteChanged() {
         if (null != this.listener && null != this.listener.get()) {
@@ -109,10 +117,36 @@ public class VolumeManager {
         }
     }
 
+    private void fireAudioFocusLossed() {
+        if (null != this.listener && null != this.listener.get()) {
+            this.listener.get().onAudioFocusLossed();
+        }
+    }
+
+    private void fireAudioFocusGranted() {
+        if (null != this.listener && null != this.listener.get()) {
+            this.listener.get().onAudioFocusGranted();
+        }
+    }
 
     public void release() {
         this.listener = null;
         this.unregisterVolumeListener();
+        this.unregisterAudioFocusListener();
+    }
+
+    @Override
+    public void onAudioFocusChange(int focus) {
+        switch (focus) {
+            case AudioManager.AUDIOFOCUS_GAIN:
+                fireAudioFocusGranted();
+                break;
+            case AudioManager.AUDIOFOCUS_LOSS:
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+            case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                fireAudioFocusLossed();
+                break;
+        }
     }
 
     private BroadcastReceiver volumeBroadcastReceiver = new BroadcastReceiver() {

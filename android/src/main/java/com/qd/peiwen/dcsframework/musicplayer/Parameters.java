@@ -15,7 +15,9 @@ public class Parameters {
     public int duration = 0;
     public int position = 0;
     public Object playObject = null;
+    public boolean pauseByUser = false;
     public boolean enterBackground = false;
+    public boolean audioFocusLossed = false;
     public boolean audioRecordStarted = false;
     public boolean dialogChannelOccupied = false;
 
@@ -29,7 +31,11 @@ public class Parameters {
     }
 
     public boolean isConditionsMeetRequirements() {
-        if (enterBackground) {
+        if (pauseByUser) {
+            return false;
+        } else if (enterBackground) {
+            return false;
+        } else if (audioFocusLossed) {
             return false;
         } else if (audioRecordStarted) {
             return false;

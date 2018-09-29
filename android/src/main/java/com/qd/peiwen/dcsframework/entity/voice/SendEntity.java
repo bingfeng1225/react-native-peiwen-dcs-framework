@@ -17,6 +17,8 @@ public class SendEntity {
     private String deviceid;
     @SerializedName("sessionid")
     private String sessionid = "";
+    @SerializedName("location")
+    private String location;
     @SerializedName("text")
     private String text;
 
@@ -66,5 +68,13 @@ public class SendEntity {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

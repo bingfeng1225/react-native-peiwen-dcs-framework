@@ -23,23 +23,34 @@
         self.duration = 0;
         self.position = 0;
         self.playObject = nil;
-        self.enterBackground = false;
-        self.audioRecordStarted = false;
-        self.dialogChannelOccupied = false;
+        self.pauseByUser = NO;
+        self.enterBackground = NO;
+        self.audioRecordStarted = NO;
+        self.dialogChannelOccupied = NO;
         self.channelType = channelType;
-        [self initChannelStates];
+        self.channelStates = [NSMutableArray array];
+        [self.channelStates addObject:[[PWChannelState alloc] initWithChannelType:PW_CHANNEL_AUDIO]];
+        [self.channelStates addObject:[[PWChannelState alloc] initWithChannelType:PW_CHANNEL_SPEAK]];
     }
     return self;
 }
 
-- (void)initChannelStates {
-    self.channelStates = [NSMutableArray array];
-    [self.channelStates addObject:[[PWChannelState alloc] initWithChannelType:PW_CHANNEL_AUDIO]];
-    [self.channelStates addObject:[[PWChannelState alloc] initWithChannelType:PW_CHANNEL_SPEAK]];
+- (PWChannelState *)findChannelState:(PWChannelType)channelType {
+    PWChannelState *result = nil;
+    for (PWChannelState *state in self.channelStates) {
+        if(channelType == state.channelType){
+            result = state;
+            break;
+        }
+    }
+    return result;
 }
 
+
 - (BOOL)isConditionsMeetRequirements {
-    if (self.enterBackground) {
+    if (self.pauseByUser) {
+        return NO;
+    } else if (self.enterBackground) {
         return NO;
     } else if (self.audioRecordStarted) {
         return NO;
@@ -52,9 +63,9 @@
 - (BOOL)isConditionOfChannelState {
     PWChannelState *channelState  = [self findHeightChannnelState];
     if (self.channelType >= channelState.channelType) {
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
 }
 
 - (PWChannelState *)findHeightChannnelState {

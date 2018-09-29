@@ -23,7 +23,7 @@
 
 - (void)initFramework;
 
-- (void)sendHTextInputRequest:(NSString *)content;
+- (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location;
 
 - (void)releaseFramework;
 @end

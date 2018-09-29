@@ -45,9 +45,9 @@ RCT_EXPORT_METHOD(initFramework:(NSDictionary *)param
     }
 }
 
-RCT_EXPORT_METHOD(sendTextRequest:(NSString *)content){
+RCT_EXPORT_METHOD(sendTextRequest:(NSDictionary *)param){
     if(self.framework){
-        [self.framework sendHTextInputRequest:content];
+        [self.framework sendHTextInputRequest:[param objectForKey:@"content"] location:[param objectForKey:@"location"]];
     }
 }
 

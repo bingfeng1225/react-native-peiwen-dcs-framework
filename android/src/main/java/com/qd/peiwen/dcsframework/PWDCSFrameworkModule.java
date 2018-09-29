@@ -69,13 +69,13 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void sendTextRequest(String content){
+    public void sendTextRequest(ReadableMap map){
         if(null != this.framework) {
             SendEventCard card = new SendEventCard();
-            card.setContent(content);
+            card.setContent(map.getString("content"));
             card.setUuid(IDCreator.createActiveRequestId());
             card.setTimestamp(System.currentTimeMillis());
-            this.framework.sendVoiceRecognizeRequest(card);
+            this.framework.sendVoiceRecognizeRequest(card,map.getString("location"));
         }
     }
 
