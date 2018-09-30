@@ -21,6 +21,18 @@ NSString *const PWSystemModuleName = @"SystemInterface";
 NSString *const PWSystemModuleNameSpace = @"ai.dueros.device_interface.system";
 NSString *const PWSystemModuleSetSessionid = @"SetSessionid";
 
+NSString *const PWAudioPlayerModuleName = @"AudioPlayerInterface";
+NSString *const PWAudioPlayerModuleNameSpace = @"ai.dueros.device_interface.audio_player";
+NSString *const PWAudioPlayerModulePlay = @"Play";
+NSString *const PWAudioPlayerModuleStop = @"Stop";
+NSString *const PWAudioPlayerModuleClearQueue = @"ClearQueue";
+NSString *const PWAudioPlayerModuleReplaceAll = @"REPLACE_ALL";
+NSString *const PWAudioPlayerModuleReplaceEnqueued = @"REPLACE_ENQUEUED";
+
+NSString *const PWVoiceOutputModuleName = @"VoiceOutputInterface";
+NSString *const PWVoiceOutputModuleNameSpace = @"ai.dueros.device_interface.voice_output";
+NSString *const PWVoiceOutputModuleSpeak = @"Speak";
+
 NSString *const PWVoiceRecognizeModuleName = @"VoiceRecognizeInterface";
 NSString *const PWVoiceRecognizeModuleNameSpace = @"ai.hisense.device_interface.voicerecognize";
 NSString *const PWVoiceRecognizeModuleVoiceRecognize = @"VoiceRecognize";

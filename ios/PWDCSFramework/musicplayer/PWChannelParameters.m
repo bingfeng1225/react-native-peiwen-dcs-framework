@@ -69,15 +69,18 @@
 - (PWChannelState *)findHeightChannnelState {
     PWChannelState *channelState = nil;
     for (PWChannelState *item in self.channelStates) {
-        if(!channelState){
-            channelState = item;
-        }else if(item.channelType > channelState.channelType){
-            channelState = item;
+        if(item.channelOccupied){
+            if(!channelState){
+                channelState = item;
+            }else if(item.channelType > channelState.channelType){
+                channelState = item;
+            }
         }
     }
     return channelState;
 }
 - (void)dealloc{
     NSLog(@"PWChannelParameters dealloc");
+    self.playObject = nil;
 }
 @end

@@ -10,6 +10,8 @@
 #import "PWModuleManager.h"
 #import "PWScreenModule.h"
 #import "PWSystemModule.h"
+#import "PWVoiceOutputModule.h"
+#import "PWAudioPlayerModule.h"
 #import "PWVoiceRecognizeModule.h"
 #import "PWSpeakControllerModule.h"
 
@@ -30,11 +32,14 @@
         self.systemModule = [[PWSystemModule alloc] init];
         [self.modules setObject:self.systemModule forKey:self.systemModule.nameSpace];
 
+        self.audioPlayerModule = [[PWAudioPlayerModule alloc] init];
+        [self.modules setObject:self.audioPlayerModule forKey:self.audioPlayerModule.nameSpace];
+        
+        self.voiceOutputModule = [[PWVoiceOutputModule alloc] init];
+        [self.modules setObject:self.voiceOutputModule forKey:self.voiceOutputModule.nameSpace];
+        
         self.voiceRecognizeModule = [[PWVoiceRecognizeModule alloc] init];
         [self.modules setObject:self.voiceRecognizeModule forKey:self.voiceRecognizeModule.nameSpace];
-        
-//        self.speakControllerModule = [[PWSpeakControllerModule alloc] init];
-//        [self.modules setObject:self.speakControllerModule forKey:self.speakControllerModule.nameSpace];
     }
     return self;
 }
@@ -50,14 +55,13 @@
     NSDictionary *payload = directive[@"payload"];
     NSString *name = directive[@"header"][@"name"];
     NSString *namespace = directive[@"header"][@"namespace"];
-    
     PWBaseModule *module = [self.modules objectForKey:namespace];
     [module process:name payload:payload];
 }
 
 - (void)releaseManager{
     for (PWBaseModule *module in self.modules.allValues) {
-        [module initModule];
+        [module releaseModule];
     }
 }
 

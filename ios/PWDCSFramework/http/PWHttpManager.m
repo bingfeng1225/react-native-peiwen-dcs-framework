@@ -52,6 +52,7 @@
 - (void)releaseManager{
     if (self.session) {
         [self.session invalidateAndCancel];
+        self.session = nil;
     }
 }
 

@@ -10,12 +10,16 @@
 
 @class PWScreenModule;
 @class PWSystemModule;
+@class PWVoiceOutputModule;
+@class PWAudioPlayerModule;
 @class PWVoiceRecognizeModule;
 @class PWSpeakControllerModule;
 @interface PWModuleManager : NSObject
 
 @property (nonatomic,strong) PWScreenModule *screenModule;
 @property (nonatomic,strong) PWSystemModule *systemModule;
+@property (nonatomic,strong) PWVoiceOutputModule *voiceOutputModule;
+@property (nonatomic,strong) PWAudioPlayerModule *audioPlayerModule;
 @property (nonatomic,strong) PWVoiceRecognizeModule *voiceRecognizeModule;
 @property (nonatomic,strong) PWSpeakControllerModule *speakControllerModule;
 

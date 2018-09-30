@@ -16,9 +16,11 @@
 #import "PWBTextInputRequest.h"
 #import "PWScreenModule.h"
 #import "PWSystemModule.h"
+#import "PWAudioPlayerModule.h"
+#import "PWVoiceOutputModule.h"
 #import "PWVoiceRecognizeModule.h"
 
-@interface PWFramework () <PWMessageQueueDelegate,PWHTextInputRequestDelegate,PWBTextInputRequestDelegate,PWSystemModuleDelegate,PWScreenModuleDelegate,PWVoiceRecognizeModuleDelegate>
+@interface PWFramework () <PWMessageQueueDelegate,PWHTextInputRequestDelegate,PWBTextInputRequestDelegate,PWSystemModuleDelegate,PWScreenModuleDelegate,PWAudioPlayerModuleDelegate,PWVoiceRecognizeModuleDelegate,PWVoiceOutputModuleDelegate>
 @property (nonatomic,strong) PWUUIDManager *uuidManager;
 @property (nonatomic,strong) PWHttpManager *httpManager;
 @property (nonatomic,strong) PWMessageQueue *messageQueue;
@@ -66,6 +68,11 @@
         self.moduleManager = [[PWModuleManager alloc] init];
         self.moduleManager.screenModule.delegate = self;
         self.moduleManager.systemModule.delegate = self;
+        self.moduleManager.audioPlayerModule.delegate = self;
+        self.moduleManager.voiceOutputModule.delegate = self;
+        self.moduleManager.voiceOutputModule.deviceID = self.deviceid;
+        self.moduleManager.voiceOutputModule.uuidManager = self.uuidManager;
+        self.moduleManager.voiceOutputModule.speakDownloadURL = self.speakDownloadURL;
         self.moduleManager.voiceRecognizeModule.delegate = self;
         [self.moduleManager initManager];
     }
@@ -75,6 +82,7 @@
     if(!self.channelManager){
         self.channelManager = [[PWChannelManager alloc] init];
         [self.channelManager initManager];
+        [self.channelManager insertPlayer:self.moduleManager.audioPlayerModule.player];
     }
 }
 
@@ -137,12 +145,11 @@
 
 #pragma mark PWHTextInputRequestDelegate
 - (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location{
-    [self dialogChannelOccupied];
+//    [self dialogChannelOccupied];
     [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession location:location content:content delegate:self];
 }
 
 - (void)onHTextInputStarted:(NSString *)uuid content:(NSString *)content{
-    NSLog(@"HTextInputStarted-------");
     NSDictionary *dictionary = @{
                                  @"uuid":uuid,
                                  @"content":content,
@@ -152,11 +159,9 @@
 }
 
 - (void)onHTextInputFailured:(NSString *)uuid{
-    NSLog(@"HTextInputFailured-------");
 }
 
 - (void)onHTextInputSuccessed:(NSString *)uuid directives:(NSArray *)directives{
-    NSLog(@"HTextInputSuccessed-------");
     for (NSDictionary *directive in directives) {
         [self.messageQueue processDirective:directive];
     }
@@ -168,15 +173,15 @@
 }
 
 - (void)onBTextInputStarted:(NSString *)uuid content:(NSString *)content{
-    NSLog(@"BTextInputStarted-------");
+    
 }
 
 - (void)onBTextInputFailured:(NSString *)uuid{
-    NSLog(@"BTextInputFailured-------");
+    
 }
 
 - (void)onBTextInputSuccessed:(NSString *)uuid directives:(NSArray *)directives{
-    NSLog(@"BTextInputSuccessed-------");
+    
     for (NSDictionary *directive in directives) {
         [self.messageQueue processDirective:directive];
     }
@@ -184,44 +189,54 @@
 
 #pragma mark PWScreenModuleDelegate
 - (void)onRecvTextCard:(NSDictionary *)payload{
-    NSLog(@"onRecvTextCard------- ");
     [self sendEvent:ON_RECEIVE_TEXT_CARD content:[self dictionary2JsonString:payload]];
 }
 - (void)onRecvListCard:(NSDictionary *)payload{
-    NSLog(@"onRecvListCard-------");
     [self sendEvent:ON_RECEIVE_LIST_CARD content:[self dictionary2JsonString:payload]];
 }
 - (void)onRecvServiceCard:(NSDictionary *)payload{
-    NSLog(@"onRecvServiceCard-------");
     [self sendEvent:ON_RECEIVE_SERVICE_CARD content:[self dictionary2JsonString:payload]];
 }
 
 - (void)onRecvStandardCard:(NSDictionary *)payload{
-    NSLog(@"onRecvStandardCard-------");
     [self sendEvent:ON_RECEIVE_STANDARD_CARD content:[self dictionary2JsonString:payload]];
 }
 
 - (void)onRecvImageListCard:(NSDictionary *)payload{
-    NSLog(@"onRecvImageListCard-------");
     [self sendEvent:ON_RECEIVE_IMAGE_LIST_CARD content:[self dictionary2JsonString:payload]];
 }
 
 - (void)onRecvServiceListCard:(NSDictionary *)payload{
-    NSLog(@"onRecvServiceListCard-------");
     [self sendEvent:ON_RECEIVE_SERVICE_LIST_CARD content:[self dictionary2JsonString:payload]];
 }
 
 #pragma mark PWSystemModuleDelegate
 - (void)onSessionChanged:(NSString *)session{
-    NSLog(@"onSessionChanged-------");
     self.uuidManager.lastSession = session;
+}
+
+#pragma mark PWAudioPlayerModuleDelegate
+- (void)onAudioChannelOccupied{
+    [self.channelManager audioChannelOccupied];
+}
+- (void)onAudioChannelReleased{
+    [self.channelManager audioChannelReleased];
+}
+
+#pragma mark PWVoiceOutputModuleDelegate
+- (void)onSpeakChannelOccupied{
+    [self.channelManager speakChannelOccupied];
+}
+
+- (void)onSpeakChannelReleased{
+    [self.channelManager speakChannelReleased];
 }
 
 #pragma mark PWVoiceRecognizeModuleDelegate
 - (void)onRecvVoiceRecognize:(NSDictionary *)payload{
-    NSLog(@"onRecvVoiceRecognize-------");
     [self sendBTextInputRequest:payload[@"uuid"] content:payload[@"content"]];
 }
+
 
 
 #pragma mark 功能函数

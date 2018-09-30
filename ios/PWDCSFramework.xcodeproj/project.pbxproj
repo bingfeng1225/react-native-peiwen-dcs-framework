@@ -18,6 +18,10 @@
 		01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DC92154DB4C00F773E4 /* PWMessageQueue.m */; };
 		014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */ = {isa = PBXBuildFile; fileRef = 014538E6214B564F00E792AF /* PWDCSFramework.m */; };
 		014538E8214B564F00E792AF /* PWDCSFramework.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 014538E5214B564F00E792AF /* PWDCSFramework.h */; };
+		0157F746216070DB00FE4B4E /* PWAudioPlayerModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F745216070DB00FE4B4E /* PWAudioPlayerModule.m */; };
+		0157F749216077D000FE4B4E /* PWVoiceOutputModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F748216077D000FE4B4E /* PWVoiceOutputModule.m */; };
+		0157F74C2160A22600FE4B4E /* PWSynthesisPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F74B2160A22600FE4B4E /* PWSynthesisPlayer.m */; };
+		0157F7502160AF3100FE4B4E /* PWSandBoxHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F74F2160AA3800FE4B4E /* PWSandBoxHelper.m */; };
 		0161C0C2215B7F930041581C /* PWConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0C1215B7F930041581C /* PWConstants.m */; };
 		0161C0CB215B90170041581C /* PWScreenModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0CA215B90170041581C /* PWScreenModule.m */; };
 		0161C0CE215B902F0041581C /* PWSystemModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0161C0CD215B902F0041581C /* PWSystemModule.m */; };
@@ -64,6 +68,14 @@
 		014538E2214B564F00E792AF /* libPWDCSFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPWDCSFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		014538E5214B564F00E792AF /* PWDCSFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWDCSFramework.h; sourceTree = "<group>"; };
 		014538E6214B564F00E792AF /* PWDCSFramework.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWDCSFramework.m; sourceTree = "<group>"; };
+		0157F744216070DB00FE4B4E /* PWAudioPlayerModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWAudioPlayerModule.h; sourceTree = "<group>"; };
+		0157F745216070DB00FE4B4E /* PWAudioPlayerModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWAudioPlayerModule.m; sourceTree = "<group>"; };
+		0157F747216077D000FE4B4E /* PWVoiceOutputModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWVoiceOutputModule.h; sourceTree = "<group>"; };
+		0157F748216077D000FE4B4E /* PWVoiceOutputModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWVoiceOutputModule.m; sourceTree = "<group>"; };
+		0157F74A2160A22600FE4B4E /* PWSynthesisPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWSynthesisPlayer.h; sourceTree = "<group>"; };
+		0157F74B2160A22600FE4B4E /* PWSynthesisPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWSynthesisPlayer.m; sourceTree = "<group>"; };
+		0157F74E2160AA3800FE4B4E /* PWSandBoxHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWSandBoxHelper.h; sourceTree = "<group>"; };
+		0157F74F2160AA3800FE4B4E /* PWSandBoxHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWSandBoxHelper.m; sourceTree = "<group>"; };
 		0161C0C0215B7F930041581C /* PWConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWConstants.h; sourceTree = "<group>"; };
 		0161C0C1215B7F930041581C /* PWConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWConstants.m; sourceTree = "<group>"; };
 		0161C0C9215B90170041581C /* PWScreenModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWScreenModule.h; sourceTree = "<group>"; };
@@ -124,6 +136,8 @@
 				01335DB821548EAE00F773E4 /* PWChannelState.m */,
 				01335DBA2154944B00F773E4 /* PWChannelManager.h */,
 				01335DBB2154944B00F773E4 /* PWChannelManager.m */,
+				0157F74A2160A22600FE4B4E /* PWSynthesisPlayer.h */,
+				0157F74B2160A22600FE4B4E /* PWSynthesisPlayer.m */,
 			);
 			path = musicplayer;
 			sourceTree = "<group>";
@@ -174,6 +188,7 @@
 		014538E4214B564F00E792AF /* PWDCSFramework */ = {
 			isa = PBXGroup;
 			children = (
+				0157F74D2160AA3800FE4B4E /* sandbox */,
 				0161C0BF215B7F750041581C /* constant */,
 				012ECB14215B1B6E00B22CA8 /* uuid */,
 				01913E392158D14300D0EFF4 /* http */,
@@ -185,6 +200,15 @@
 				014538E6214B564F00E792AF /* PWDCSFramework.m */,
 			);
 			path = PWDCSFramework;
+			sourceTree = "<group>";
+		};
+		0157F74D2160AA3800FE4B4E /* sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				0157F74E2160AA3800FE4B4E /* PWSandBoxHelper.h */,
+				0157F74F2160AA3800FE4B4E /* PWSandBoxHelper.m */,
+			);
+			path = sandbox;
 			sourceTree = "<group>";
 		};
 		0161C0BF215B7F750041581C /* constant */ = {
@@ -209,6 +233,8 @@
 		0161C0C4215B8F7D0041581C /* voiceoutput */ = {
 			isa = PBXGroup;
 			children = (
+				0157F747216077D000FE4B4E /* PWVoiceOutputModule.h */,
+				0157F748216077D000FE4B4E /* PWVoiceOutputModule.m */,
 			);
 			path = voiceoutput;
 			sourceTree = "<group>";
@@ -216,6 +242,8 @@
 		0161C0C5215B8F8B0041581C /* audioplayer */ = {
 			isa = PBXGroup;
 			children = (
+				0157F744216070DB00FE4B4E /* PWAudioPlayerModule.h */,
+				0157F745216070DB00FE4B4E /* PWAudioPlayerModule.m */,
 			);
 			path = audioplayer;
 			sourceTree = "<group>";
@@ -325,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0157F7502160AF3100FE4B4E /* PWSandBoxHelper.m in Sources */,
 				01335DB621548C2F00F773E4 /* PWChannelParameters.m in Sources */,
 				0161C0D1215B90570041581C /* PWSpeakControllerModule.m in Sources */,
 				01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */,
@@ -333,8 +362,11 @@
 				01335DC02154C35000F773E4 /* PWModuleManager.m in Sources */,
 				0161C0D4215B90750041581C /* PWVoiceRecognizeModule.m in Sources */,
 				01913E38215888D300D0EFF4 /* PWFramework.m in Sources */,
+				0157F749216077D000FE4B4E /* PWVoiceOutputModule.m in Sources */,
+				0157F74C2160A22600FE4B4E /* PWSynthesisPlayer.m in Sources */,
 				012ECB17215B1B7E00B22CA8 /* PWUUIDManager.m in Sources */,
 				01913E3C2158D15F00D0EFF4 /* PWHttpManager.m in Sources */,
+				0157F746216070DB00FE4B4E /* PWAudioPlayerModule.m in Sources */,
 				01335DC32154C36000F773E4 /* PWBaseModule.m in Sources */,
 				01335DB921548EAE00F773E4 /* PWChannelState.m in Sources */,
 				0161C0C2215B7F930041581C /* PWConstants.m in Sources */,
@@ -400,7 +432,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -452,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -19,7 +19,7 @@
 
 @property (nonatomic, strong) NSTimer *playerTracker;
 @property (nonatomic,assign) NSInteger bufferPercentage;
-@property (nonatomic,strong) PWChannelParameters *parameters;
+
 @end
 
 @implementation PWChannelPlayer
@@ -29,6 +29,8 @@
     }
     return self;
 }
+
+
 
 #pragma mark Getter And Setter
 - (NSInteger)position{
@@ -227,6 +229,9 @@
 }
 
 #pragma mark 播放器周期接口
+- (void)initPlayer{
+    [self unload];
+}
 - (void)load:(NSString *) url {
     if([url hasPrefix:@"http"]){
         self.urlAssert = [AVURLAsset assetWithURL:[NSURL URLWithString:url]];
@@ -260,7 +265,7 @@
     self.buffing = false;
     self.seekTime = 0;
     self.bufferPercentage = 0;
-    self.errorType = PW_PLAYER_IDLE;
+    self.playerState = PW_PLAYER_IDLE;
     self.errorType = PW_PLAYER_ERROR_NONE;
 }
 
@@ -309,6 +314,10 @@
         self.parameters.pauseByUser = NO;
         [self parametersChanged];
     }
+}
+
+- (void)destoryPlayer{
+    [self unload];
 }
 
 #pragma mark 视频监听接口

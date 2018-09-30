@@ -6,6 +6,7 @@
 //  Copyright © 2018年 hisense. All rights reserved.
 //
 
+#import "PWConstants.h"
 #import "PWSpeakControllerModule.h"
 
 @implementation PWSpeakControllerModule

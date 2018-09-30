@@ -27,9 +27,25 @@ extern NSString *const PWSystemModuleName;
 extern NSString *const PWSystemModuleNameSpace;
 extern NSString *const PWSystemModuleSetSessionid;
 
+//PWAudioPlayerModule
+extern NSString *const PWAudioPlayerModuleName;
+extern NSString *const PWAudioPlayerModuleNameSpace;
+extern NSString *const PWAudioPlayerModulePlay;
+extern NSString *const PWAudioPlayerModuleStop;
+extern NSString *const PWAudioPlayerModuleClearQueue;
+extern NSString *const PWAudioPlayerModuleReplaceAll;
+extern NSString *const PWAudioPlayerModuleReplaceEnqueued;
+
+//PWVoiceOutputModule
+extern NSString *const PWVoiceOutputModuleName;
+extern NSString *const PWVoiceOutputModuleNameSpace;
+extern NSString *const PWVoiceOutputModuleSpeak;
+
 //PWVoiceRecognizeModule
 extern NSString *const PWVoiceRecognizeModuleName;
 extern NSString *const PWVoiceRecognizeModuleNameSpace;
 extern NSString *const PWVoiceRecognizeModuleVoiceRecognize;
+
+
 
 #endif

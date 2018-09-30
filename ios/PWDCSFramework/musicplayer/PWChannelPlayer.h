@@ -9,6 +9,7 @@
 #import "PWEnum.h"
 
 @class PWChannelPlayer;
+@class PWChannelParameters;
 
 @protocol PWChannelPlayerDelegate <NSObject>
 
@@ -40,9 +41,22 @@
 @property (nonatomic,assign) PWPlayerErrorType errorType;
 @property (nonatomic,assign,readonly) NSInteger position;
 @property (nonatomic,assign,readonly) NSInteger duration;
+@property (nonatomic,strong) PWChannelParameters *parameters;
 @property (nonatomic,weak) id<PWChannelPlayerDelegate> delegate;
 
 - (instancetype)initWithChannelType:(PWChannelType) channelType;
+
+- (void)initPlayer;
+- (void)load:(NSString *) url;
+- (void)pause;
+- (void)resume;
+- (void)stop;
+- (void)rewind;
+- (void)fastForward;
+- (void)seekToTime:(NSInteger)time;
+- (BOOL)hasPlayContent;
+- (void)unload;
+- (void)destoryPlayer;
 
 - (void)enterBackground;
 

@@ -47,7 +47,6 @@
     NSData *data = [part dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
     if(!error && response){
-        NSLog(@"%@",part);
         NSDictionary *directive = [self availableResponse:response];
         if(directive){
             [self.directives addObject:directive];
