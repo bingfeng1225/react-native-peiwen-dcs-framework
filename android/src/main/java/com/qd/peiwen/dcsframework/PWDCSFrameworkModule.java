@@ -59,6 +59,33 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
         }
     }
 
+    @ReactMethod
+    public void enterBackground() {
+        if(null != this.framework) {
+            this.framework.enterBackground();
+        }
+    }
+
+    @ReactMethod
+    public void becomeForeground() {
+        if(null != this.framework) {
+            this.framework.becomeForeground();
+        }
+    }
+
+    @ReactMethod
+    public void audioRecordStarted() {
+        if(null != this.framework) {
+            this.framework.audioRecordStarted();
+        }
+    }
+
+    @ReactMethod
+    public void audioRecordFinished() {
+        if(null != this.framework) {
+            this.framework.audioRecordFinished();
+        }
+    }
 
     @ReactMethod
     public void releaseFramework(){
@@ -229,12 +256,20 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
 
     @Override
     public void onRecvTrainTicket(TicketPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECV_TRAIN_TICKET.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override
     public void onRecvFlightTicket(TicketPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECV_FLIGHT_TICKET.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
 }

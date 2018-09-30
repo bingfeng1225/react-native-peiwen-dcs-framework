@@ -101,12 +101,33 @@
     }
 }
 
-- (void)sendBTextInputRequest:(NSString *)uuid content:(NSString *)content{
-    [self.httpManager textBInputRequest:uuid content:content delegate:self];
+#pragma mark 通道变化处理
+- (void)enterBackground{
+    [self.channelManager enterBackground];
 }
 
-- (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location{
-    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession location:location content:content delegate:self];
+- (void)becomeForeground{
+    [self.channelManager becomeForeground];
+}
+
+- (void)audioRecordStarted{
+    [self.channelManager audioRecordStarted];
+//    this.deviceManager.voiceOutputModule().channelPlayer().stop();
+}
+
+- (void)audioRecordFinished{
+    [self.channelManager audioRecordFinished ];
+}
+
+- (void)dialogChannelReleased:(NSString *) uuid {
+    if ([self.uuidManager isActiveRequest:uuid]) {
+        [self.channelManager dialogChannelReleased ];
+    }
+}
+
+- (void)dialogChannelOccupied {
+    [self.channelManager dialogChannelOccupied];
+//    this.deviceManager.voiceOutputModule().channelPlayer().stop();
 }
 
 #pragma mark PWPWMessageQueueDelegate
@@ -115,6 +136,11 @@
 }
 
 #pragma mark PWHTextInputRequestDelegate
+- (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location{
+    [self dialogChannelOccupied];
+    [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession location:location content:content delegate:self];
+}
+
 - (void)onHTextInputStarted:(NSString *)uuid content:(NSString *)content{
     NSLog(@"HTextInputStarted-------");
     NSDictionary *dictionary = @{
@@ -137,6 +163,10 @@
 }
 
 #pragma mark PWBTextInputRequestDelegate
+- (void)sendBTextInputRequest:(NSString *)uuid content:(NSString *)content{
+    [self.httpManager textBInputRequest:uuid content:content delegate:self];
+}
+
 - (void)onBTextInputStarted:(NSString *)uuid content:(NSString *)content{
     NSLog(@"BTextInputStarted-------");
 }

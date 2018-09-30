@@ -174,6 +174,7 @@ public class DCSFramework implements
     }
 
     public void sendVoiceRecognizeRequest(SendEventCard card,String localtion) {
+        this.dialogChannelOccupied();
         httpManager.voiceRecognizeRequest(card,this.lastSessionid,localtion, new VoiceRecognizeListener(card));
     }
 

@@ -20,8 +20,6 @@
 @implementation PWChannelParameters
 -(instancetype)initWithChannelType:(PWChannelType) channelType{
     if(self = [super init]){
-        self.duration = 0;
-        self.position = 0;
         self.playObject = nil;
         self.pauseByUser = NO;
         self.enterBackground = NO;

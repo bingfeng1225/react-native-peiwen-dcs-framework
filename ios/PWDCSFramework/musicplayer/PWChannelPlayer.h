@@ -8,12 +8,38 @@
 
 #import "PWEnum.h"
 
-@protocol PWChannelPlayerDelegate
+@class PWChannelPlayer;
+
+@protocol PWChannelPlayerDelegate <NSObject>
+
+- (void)onPlayerStoped:(PWChannelPlayer *) player object:(id)object;
+
+- (void)onPlayerCompleted:(PWChannelPlayer *) player object:(id)object;
+
+- (void)onPlayerBufferingStart:(PWChannelPlayer *) player object:(id)object;
+
+- (void)onPlayerBufferingEnded:(PWChannelPlayer *) player object:(id)object;
+
+- (void)onBufferingUpdated:(PWChannelPlayer *) player object:(id)object bufferPercentage:(NSInteger)bufferPercentage;
+
+- (void)onPlayerErrorOccurred:(PWChannelPlayer *) player object:(id)object error:(PWPlayerErrorType)error;
+
+- (void)onPlayerStateChanged:(PWChannelPlayer *) player object:(id)object state:(PWPlayerState) state;
+
+- (void)onPlayerProgressChanged:(PWChannelPlayer *) player object:(id)object position:(NSInteger) position duration:(NSInteger)duration;
 
 @end
 
 @interface PWChannelPlayer : NSObject
 
+@property (nonatomic,assign) BOOL ended;
+@property (nonatomic,assign) BOOL stoped;
+@property (nonatomic,assign) BOOL buffing;
+@property (nonatomic,assign) NSInteger seekTime;
+@property (nonatomic,assign) PWPlayerState playerState;
+@property (nonatomic,assign) PWPlayerErrorType errorType;
+@property (nonatomic,assign,readonly) NSInteger position;
+@property (nonatomic,assign,readonly) NSInteger duration;
 @property (nonatomic,weak) id<PWChannelPlayerDelegate> delegate;
 
 - (instancetype)initWithChannelType:(PWChannelType) channelType;

@@ -245,7 +245,12 @@ public class ChannelPlayer implements
 
     public void seekToTime(int msec) {
         if (this.canSeek()) {
-            mediaPlayer.seekTo(msec);
+            int total = mediaPlayer.getDuration();
+            if(msec >= total){
+                mediaPlayer.seekTo(total - 1000);
+            }else{
+                mediaPlayer.seekTo(msec);
+            }
         }
     }
 
@@ -369,16 +374,12 @@ public class ChannelPlayer implements
     @Override
     public void onPrepared(MediaPlayer mp) {
         this.setPlayerState(PlayerState.PLAYER_PREPARED);
-        this.seekToTime(this.seekTime);
+        if(seekTime > 0) {
+            this.seekToTime(this.seekTime);
+        }
         parameters.duration = mediaPlayer.getDuration();
         parameters.position = this.seekTime;
-        if (this.parameters.isConditionsMeetRequirements()) {
-            startTimer();
-            this.mediaPlayer.start();
-            this.setPlayerState(PlayerState.PLAYER_PLAYING);
-        } else {
-            this.setPlayerState(PlayerState.PLAYER_PAUSED);
-        }
+        this.parametersChanged();
     }
 
     @Override

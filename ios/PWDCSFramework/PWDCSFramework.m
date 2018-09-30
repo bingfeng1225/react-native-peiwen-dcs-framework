@@ -45,6 +45,34 @@ RCT_EXPORT_METHOD(initFramework:(NSDictionary *)param
     }
 }
 
+
+RCT_EXPORT_METHOD(enterBackground) {
+    if(self.framework){
+        [self.framework enterBackground];
+    }
+}
+
+
+RCT_EXPORT_METHOD(becomeForeground) {
+    if(self.framework){
+        [self.framework becomeForeground];
+    }
+}
+
+
+RCT_EXPORT_METHOD(audioRecordStarted) {
+    if(self.framework){
+        [self.framework audioRecordStarted];
+    }
+}
+
+
+RCT_EXPORT_METHOD(audioRecordFinished) {
+    if(self.framework){
+        [self.framework audioRecordFinished];
+    }
+}
+
 RCT_EXPORT_METHOD(sendTextRequest:(NSDictionary *)param){
     if(self.framework){
         [self.framework sendHTextInputRequest:[param objectForKey:@"content"] location:[param objectForKey:@"location"]];

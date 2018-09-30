@@ -23,6 +23,14 @@
 
 - (void)initFramework;
 
+- (void)enterBackground;
+
+- (void)becomeForeground;
+
+- (void)audioRecordStarted;
+
+- (void)audioRecordFinished;
+
 - (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location;
 
 - (void)releaseFramework;
