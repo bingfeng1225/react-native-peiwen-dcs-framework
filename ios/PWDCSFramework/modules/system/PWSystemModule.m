@@ -19,6 +19,10 @@
     return self;
 }
 
+-(BOOL)isAvailableDirective:(NSString *)name{
+    return [PWSystemModuleSetSessionid isEqualToString:name];
+}
+
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{
     if([PWSystemModuleSetSessionid isEqualToString:name]){
         [self fireSessionChanged:payload[@"sessionid"]];

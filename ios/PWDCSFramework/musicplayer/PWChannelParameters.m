@@ -48,11 +48,14 @@
 - (BOOL)isConditionsMeetRequirements {
     if (self.pauseByUser) {
         return NO;
-    } else if (self.enterBackground) {
+    }
+    if (self.enterBackground) {
         return NO;
-    } else if (self.audioRecordStarted) {
+    }
+    if (self.audioRecordStarted) {
         return NO;
-    } else if (self.dialogChannelOccupied) {
+    }
+    if (self.dialogChannelOccupied) {
         return NO;
     }
     return [self isConditionOfChannelState];

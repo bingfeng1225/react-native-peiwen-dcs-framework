@@ -6,6 +6,7 @@
 //  Copyright © 2018年 hisense. All rights reserved.
 //
 
+#import "PWConstants.h"
 #import "PWFramework.h"
 #import "PWUUIDManager.h"
 #import "PWHttpManager.h"
@@ -83,6 +84,7 @@
         self.channelManager = [[PWChannelManager alloc] init];
         [self.channelManager initManager];
         [self.channelManager insertPlayer:self.moduleManager.audioPlayerModule.player];
+        [self.channelManager insertPlayer:self.moduleManager.voiceOutputModule.player];
     }
 }
 
@@ -120,7 +122,7 @@
 
 - (void)audioRecordStarted{
     [self.channelManager audioRecordStarted];
-//    this.deviceManager.voiceOutputModule().channelPlayer().stop();
+    //    this.deviceManager.voiceOutputModule().channelPlayer().stop();
 }
 
 - (void)audioRecordFinished{
@@ -135,7 +137,7 @@
 
 - (void)dialogChannelOccupied {
     [self.channelManager dialogChannelOccupied];
-//    this.deviceManager.voiceOutputModule().channelPlayer().stop();
+    //    this.deviceManager.voiceOutputModule().channelPlayer().stop();
 }
 
 #pragma mark PWPWMessageQueueDelegate
@@ -145,7 +147,7 @@
 
 #pragma mark PWHTextInputRequestDelegate
 - (void)sendHTextInputRequest:(NSString *)content location:(NSString *)location{
-//    [self dialogChannelOccupied];
+    [self dialogChannelOccupied];
     [self.httpManager textHInputRequest:[self.uuidManager createActiveRequest] sessionid:self.uuidManager.lastSession location:location content:content delegate:self];
 }
 
@@ -159,13 +161,68 @@
 }
 
 - (void)onHTextInputFailured:(NSString *)uuid{
+    [self dialogChannelReleased:uuid];
+    [self sendEvent:VOICE_RECOGNIZE_FAILURED content:uuid];
 }
 
 - (void)onHTextInputSuccessed:(NSString *)uuid directives:(NSArray *)directives{
+    BOOL needResume = NO;
+    BOOL hasException = NO;
+    NSDictionary *speak = nil;
+    NSDictionary *recognize = nil;
+    NSMutableArray *array = [NSMutableArray array];
     for (NSDictionary *directive in directives) {
-        [self.messageQueue processDirective:directive];
+        NSString *name = directive[@"header"][@"name"];
+        NSString *nameSpace = directive[@"header"][@"namespace"];
+        if([PWSystemModuleNameSpace isEqualToString:nameSpace] && [PWSystemModuleThrowException isEqualToString:name]){
+            hasException = YES;
+            NSLog(@"H find exception directive");
+            break;
+        } else if(![self.moduleManager isAvailable:nameSpace directive:name]){
+            NSLog(@"H find unhandler directive");
+            needResume = NO;
+            [array removeAllObjects];
+            [self onSessionChanged:@""];
+            speak = [self createSpeakDirective:uuid content:@"很抱歉，该功能暂不支持"];
+            [array addObject:[self createTextRenderDirective:uuid content:@"很抱歉，该功能暂不支持"]];
+            break;
+        } else if([PWVoiceOutputModuleNameSpace isEqualToString:nameSpace] && [PWVoiceOutputModuleSpeak isEqualToString:name]){
+            speak = directive;
+            NSLog(@"H find speak directive");
+        } else if([PWVoiceRecognizeModuleNameSpace isEqualToString:nameSpace] && [PWVoiceRecognizeModuleVoiceRecognize isEqualToString:name]){
+            recognize = directive;
+            NSLog(@"H find recognize directive");
+        } else {
+            [array addObject:directive];
+        }
+    }
+    
+    if(hasException){
+        [self onSessionChanged:@""];
+        [self dialogChannelReleased:uuid];
+        [self sendEvent:VOICE_RECOGNIZE_FAILURED content:uuid];
+    }else{
+        if(recognize){
+            [self.messageQueue processDirective:recognize];
+            for (NSDictionary *directive in array){
+                [self.messageQueue processDirective:directive];
+            }
+            [self sendEvent:VOICE_RECOGNIZE_SUCCESSED content:uuid];
+        } else {
+            if(speak){
+                [self.messageQueue processDirective:speak];
+            }
+            for (NSDictionary *directive in array){
+                [self.messageQueue processDirective:directive];
+            }
+            if(!needResume){
+                [self dialogChannelReleased:uuid];
+            }
+            [self sendEvent:INPUT_EVENT_SUCCESSED content:uuid];
+        }
     }
 }
+
 
 #pragma mark PWBTextInputRequestDelegate
 - (void)sendBTextInputRequest:(NSString *)uuid content:(NSString *)content{
@@ -173,17 +230,52 @@
 }
 
 - (void)onBTextInputStarted:(NSString *)uuid content:(NSString *)content{
-    
+    [self sendEvent:TEXT_INPUT_STARTED content:uuid];
 }
 
 - (void)onBTextInputFailured:(NSString *)uuid{
-    
+    [self sendEvent:TEXT_INPUT_FAILURED content:uuid];
 }
 
 - (void)onBTextInputSuccessed:(NSString *)uuid directives:(NSArray *)directives{
-    
+    BOOL hasException = NO;
+    NSDictionary *speak = nil;
+    NSMutableArray *array = [NSMutableArray array];
     for (NSDictionary *directive in directives) {
-        [self.messageQueue processDirective:directive];
+        NSString *name = directive[@"header"][@"name"];
+        NSString *nameSpace = directive[@"header"][@"namespace"];
+        if([PWSystemModuleNameSpace isEqualToString:nameSpace] && [PWSystemModuleThrowException isEqualToString:name]){
+            hasException = YES;
+            NSLog(@"B find exception directive");
+            break;
+        } else if(![self.moduleManager isAvailable:nameSpace directive:name]){
+            NSLog(@"B find unhandler directive");
+            [array removeAllObjects];
+            [self onSessionChanged:@""];
+            speak = [self createSpeakDirective:uuid content:@"很抱歉，该功能暂不支持"];
+            [array addObject:[self createTextRenderDirective:uuid content:@"很抱歉，该功能暂不支持"]];
+            break;
+        } else if([PWVoiceOutputModuleNameSpace isEqualToString:nameSpace] && [PWVoiceOutputModuleSpeak isEqualToString:name]){
+            speak = directive;
+            NSLog(@"B find speak directive");
+        } else {
+            [array addObject:directive];
+        }
+    }
+    
+    if(hasException){
+        [self onSessionChanged:@""];
+        [self dialogChannelReleased:uuid];
+        [self sendEvent:TEXT_INPUT_FAILURED content:uuid];
+    }else{
+        if(speak){
+            [self.messageQueue processDirective:speak];
+        }
+        for (NSDictionary *directive in array){
+            [self.messageQueue processDirective:directive];
+        }
+        [self dialogChannelReleased:uuid];
+        [self sendEvent:INPUT_EVENT_SUCCESSED content:uuid];
     }
 }
 
@@ -250,6 +342,40 @@
     if(self.delegate && [self.delegate respondsToSelector:@selector(sendEvent:content:)]){
         [self.delegate sendEvent:type content:content];
     }
+}
+
+
+
+- (NSDictionary *)createSpeakDirective:(NSString *)uuid content:(NSString *)content{
+    return @{
+             @"header":@{
+                     @"name":PWVoiceOutputModuleSpeak,
+                     @"namespace":PWVoiceOutputModuleNameSpace,
+                     @"messageId":[[NSUUID UUID] UUIDString]
+                     },
+             @"payload":@{
+                     @"uuid":uuid,
+                     @"format":@"TEXT",
+                     @"content":content,
+                     @"token":[[NSUUID UUID] UUIDString]
+                     }
+             };
+}
+
+- (NSDictionary *)createTextRenderDirective:(NSString *)uuid content:(NSString *)content{
+    return @{
+             @"header": @{
+                     @"name":PWScreenModuleRenderCard,
+                     @"namespace":PWScreenModuleNameSpace,
+                     @"messageId":[[NSUUID UUID] UUIDString]
+                     },
+             @"payload" : @{
+                     @"uuid":uuid,
+                     @"content":content,
+                     @"token":[[NSUUID UUID] UUIDString],
+                     @"type":PWScreenModuleRenderTextCard
+                     }
+             };
 }
 
 - (void)dealloc{

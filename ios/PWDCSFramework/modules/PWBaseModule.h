@@ -15,6 +15,7 @@
 
 - (void)initModule;
 
+- (BOOL)isAvailableDirective:(NSString *)name;
 
 - (void)process:(NSString *)name payload:(NSDictionary *)payload;
 

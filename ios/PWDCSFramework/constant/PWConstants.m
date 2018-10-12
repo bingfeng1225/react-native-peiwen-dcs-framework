@@ -20,6 +20,7 @@ NSString *const PWScreenModuleRenderServiceListCard = @"ServiceListCard";
 NSString *const PWSystemModuleName = @"SystemInterface";
 NSString *const PWSystemModuleNameSpace = @"ai.dueros.device_interface.system";
 NSString *const PWSystemModuleSetSessionid = @"SetSessionid";
+NSString *const PWSystemModuleThrowException = @"ThrowException";
 
 NSString *const PWAudioPlayerModuleName = @"AudioPlayerInterface";
 NSString *const PWAudioPlayerModuleNameSpace = @"ai.dueros.device_interface.audio_player";

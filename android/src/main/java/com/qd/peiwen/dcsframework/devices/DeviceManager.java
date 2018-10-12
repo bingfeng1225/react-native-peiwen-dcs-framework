@@ -4,7 +4,6 @@ import android.content.Context;
 
 
 import com.qd.peiwen.dcsframework.devices.audioplayer.AudioPlayerModule;
-import com.qd.peiwen.dcsframework.devices.lifevoice.LifeVoiceModule;
 import com.qd.peiwen.dcsframework.devices.navigation.NavigationModule;
 import com.qd.peiwen.dcsframework.devices.phone.PhoneModule;
 import com.qd.peiwen.dcsframework.devices.phonebill.PhoneBillModule;
@@ -63,9 +62,6 @@ public class DeviceManager {
         SpeakerControllerModule speakerController = speakerControllerModule();
         this.modules.put(speakerController.getNamespace(), speakerController);
 
-        LifeVoiceModule lifeVoice = lifeVoiceModule();
-        this.modules.put(lifeVoice.getNamespace(), lifeVoice);
-
         NavigationModule navigation = navigationModule();
         this.modules.put(navigation.getNamespace(), navigation);
 
@@ -120,11 +116,6 @@ public class DeviceManager {
         DCSRequest request = new DCSRequest();
         request.setEvent(textInputModule().textinputMessage(text));
         return request;
-    }
-
-    /***************************LifeVoice Event********************************/
-    public LifeVoiceModule lifeVoiceModule() {
-        return factory.lifeVoiceModule(context);
     }
 
     /******************************navigation Event****************************/

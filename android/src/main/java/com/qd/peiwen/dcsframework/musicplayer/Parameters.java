@@ -33,13 +33,17 @@ public class Parameters {
     public boolean isConditionsMeetRequirements() {
         if (pauseByUser) {
             return false;
-        } else if (enterBackground) {
+        }
+        if (enterBackground) {
             return false;
-        } else if (audioFocusLossed) {
+        }
+        if (audioFocusLossed) {
             return false;
-        } else if (audioRecordStarted) {
+        }
+        if (audioRecordStarted) {
             return false;
-        } else if (dialogChannelOccupied) {
+        }
+        if (dialogChannelOccupied) {
             return false;
         }
         return isConditionOfChannelState();

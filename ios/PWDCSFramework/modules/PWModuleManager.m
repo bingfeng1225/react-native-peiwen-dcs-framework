@@ -51,11 +51,19 @@
     }
 }
 
+- (BOOL)isAvailable:(NSString *)nameSpace directive:(NSString *)name{
+    PWBaseModule *module = [self.modules objectForKey:nameSpace];
+    if(module){
+        return [module isAvailableDirective:name];
+    }
+    return NO;
+}
+
 - (void)processDirective:(NSDictionary *)directive{
     NSDictionary *payload = directive[@"payload"];
     NSString *name = directive[@"header"][@"name"];
-    NSString *namespace = directive[@"header"][@"namespace"];
-    PWBaseModule *module = [self.modules objectForKey:namespace];
+    NSString *nameSpace = directive[@"header"][@"namespace"];
+    PWBaseModule *module = [self.modules objectForKey:nameSpace];
     [module process:name payload:payload];
 }
 

@@ -20,6 +20,10 @@
     return self;
 }
 
+-(BOOL)isAvailableDirective:(NSString *)name{
+    return [PWScreenModuleRenderCard isEqualToString:name];
+}
+
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{
     if(![PWScreenModuleRenderCard isEqualToString:name]){
         return;

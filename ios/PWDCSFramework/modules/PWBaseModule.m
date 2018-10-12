@@ -14,6 +14,10 @@
     
 }
 
+- (BOOL)isAvailableDirective:(NSString *)name{
+    return NO;
+}
+
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{
     [self doesNotRecognizeSelector:@selector(process:payload:)];
 }

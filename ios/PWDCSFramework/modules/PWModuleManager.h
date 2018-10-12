@@ -25,6 +25,8 @@
 
 - (void)initManager;
 
+- (BOOL)isAvailable:(NSString *)nameSpace directive:(NSString *)name;
+
 - (void)processDirective:(NSDictionary *)directive;
 
 - (void)releaseManager;

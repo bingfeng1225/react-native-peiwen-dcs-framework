@@ -19,6 +19,10 @@
     return self;
 }
 
+-(BOOL)isAvailableDirective:(NSString *)name{
+    return [PWVoiceRecognizeModuleVoiceRecognize isEqualToString:name];
+}
+
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{
     if([PWVoiceRecognizeModuleVoiceRecognize isEqualToString:name]){
         [self fireRecvVoiceRecognize:payload];

@@ -8,7 +8,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.google.gson.Gson;
-import com.qd.peiwen.dcsframework.devices.lifevoice.message.directive.LifeVoicePayload;
 import com.qd.peiwen.dcsframework.devices.navigation.message.directive.NavigationPayload;
 import com.qd.peiwen.dcsframework.devices.phonebill.message.directive.PhoneBillPayload;
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.ImageListCardPayload;
@@ -237,11 +236,6 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
                         RNEventType.ON_RECEIVE_SMSMESSAGE_LIST_CARD.name(),
                         new Gson().toJson(payload).toString()
                 );
-    }
-
-    @Override
-    public void onRecvLifeVoice(LifeVoicePayload payload) {
-
     }
 
     @Override

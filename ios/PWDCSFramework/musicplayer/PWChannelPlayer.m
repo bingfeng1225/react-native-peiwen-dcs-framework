@@ -150,7 +150,7 @@
 }
 - (void)dialogChannelReleased{
     if(self.parameters.dialogChannelOccupied){
-        self.parameters.audioRecordStarted = NO;
+        self.parameters.dialogChannelOccupied = NO;
         [self parametersChanged];
     }
 }

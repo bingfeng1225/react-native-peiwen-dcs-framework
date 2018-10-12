@@ -3,7 +3,6 @@ package com.qd.peiwen.dcsframework.devices;
 import android.content.Context;
 
 import com.qd.peiwen.dcsframework.devices.audioplayer.AudioPlayerModule;
-import com.qd.peiwen.dcsframework.devices.lifevoice.LifeVoiceModule;
 import com.qd.peiwen.dcsframework.devices.navigation.NavigationModule;
 import com.qd.peiwen.dcsframework.devices.phone.PhoneModule;
 import com.qd.peiwen.dcsframework.devices.phonebill.PhoneBillModule;
@@ -32,7 +31,6 @@ public class ModuleFactory {
     private AudioPlayerModule audioPlayerModule;
     private VoiceRecognizeModule voiceRecognizeModule;
     private SpeakerControllerModule speakerControllerModule;
-    private LifeVoiceModule lifeVoiceModule;
     private NavigationModule navigationModule;
     private PhoneBillModule phoneBillModule;
     private TicketModule ticketModule;
@@ -96,14 +94,6 @@ public class ModuleFactory {
             this.voiceRecognizeModule = new VoiceRecognizeModule(context);
         }
         return this.voiceRecognizeModule;
-    }
-
-    public LifeVoiceModule lifeVoiceModule(Context context) {
-        if (null == lifeVoiceModule) {
-            this.lifeVoiceModule = new LifeVoiceModule(context);
-        }
-
-        return this.lifeVoiceModule;
     }
 
     public NavigationModule navigationModule(Context context) {

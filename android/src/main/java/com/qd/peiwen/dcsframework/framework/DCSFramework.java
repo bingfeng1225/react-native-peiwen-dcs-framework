@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.qd.peiwen.dcsframework.devices.DeviceManager;
 import com.qd.peiwen.dcsframework.devices.audioplayer.listener.IAudioPlayerModuleListener;
-import com.qd.peiwen.dcsframework.devices.lifevoice.listener.ILifeVoiceModuleListener;
-import com.qd.peiwen.dcsframework.devices.lifevoice.message.directive.LifeVoicePayload;
 import com.qd.peiwen.dcsframework.devices.navigation.listener.INavigationModuleListener;
 import com.qd.peiwen.dcsframework.devices.navigation.message.directive.NavigationPayload;
 import com.qd.peiwen.dcsframework.devices.phone.listener.IPhoneModuleListener;
@@ -77,7 +75,6 @@ public class DCSFramework implements
         IAudioPlayerModuleListener,
         IVoiceRecognizeModuleListener,
         ISpeakerControllerModuleListener,
-        ILifeVoiceModuleListener,
         INavigationModuleListener,
         IPhoneBillModuleListener,
         ITicketModuleListener {
@@ -135,7 +132,6 @@ public class DCSFramework implements
         this.deviceManager.voiceOutputModule().setListener(this);
         this.deviceManager.audioPlayerModule().setListener(this);
         this.deviceManager.voiceRecognizeModule().setListener(this);
-        this.deviceManager.lifeVoiceModule().setListener(this);
         this.deviceManager.navigationModule().setListener(this);
         this.deviceManager.phoneBillModule().setListener(this);
         this.deviceManager.ticketModule().setListener(this);
@@ -602,12 +598,6 @@ public class DCSFramework implements
         }
     }
 
-    @Override
-    public void onRecvLifeVoice(final LifeVoicePayload payload) {
-        if (null != listener && null != listener.get()) {
-            listener.get().onRecvLifeVoice(payload);
-        }
-    }
 
     @Override
     public void onNavigationPayload(final NavigationPayload payload) {
@@ -769,7 +759,6 @@ public class DCSFramework implements
         private SendEventCard eventCard;
         private DCSRespons exceptionRespons = null;
         private DCSRespons voiceRecongnizeResons = null;
-        private DCSRespons lifeVoiceRespons = null;
         private DCSRespons phoneCallRespons = null;
         private List<DCSRespons> responses = new ArrayList<>();
 
@@ -810,8 +799,6 @@ public class DCSFramework implements
                     this.exceptionRespons = dcsRespons;
                 } else if (payload instanceof VoiceRecognizePayload) {
                     this.voiceRecongnizeResons = dcsRespons;
-                } else if (payload instanceof LifeVoicePayload) {
-                    this.lifeVoiceRespons = dcsRespons;
                 } else if (payload instanceof PhoneCallPayload) {
                     this.resume = true;
                     this.phoneCallRespons = dcsRespons;
@@ -840,9 +827,6 @@ public class DCSFramework implements
             } else if (null != voiceRecongnizeResons) {
                 fireVoiceRecognizeSuccessed(uuid);
                 directiveQueueManager.handleResponseBody(voiceRecongnizeResons);
-            } else if (null != lifeVoiceRespons) {
-                fireVoiceRecognizeSuccessed(uuid);
-                directiveQueueManager.handleResponseBody(lifeVoiceRespons);
             } else if (null != phoneCallRespons) {
                 fireInputEventSuccessed(uuid);
                 directiveQueueManager.handleResponseBody(phoneCallRespons);

@@ -26,6 +26,7 @@ extern NSString *const PWScreenModuleRenderServiceListCard;
 extern NSString *const PWSystemModuleName;
 extern NSString *const PWSystemModuleNameSpace;
 extern NSString *const PWSystemModuleSetSessionid;
+extern NSString *const PWSystemModuleThrowException;
 
 //PWAudioPlayerModule
 extern NSString *const PWAudioPlayerModuleName;

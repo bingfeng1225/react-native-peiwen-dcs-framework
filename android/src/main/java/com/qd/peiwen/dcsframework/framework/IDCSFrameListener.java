@@ -1,7 +1,6 @@
 package com.qd.peiwen.dcsframework.framework;
 
 
-import com.qd.peiwen.dcsframework.devices.lifevoice.message.directive.LifeVoicePayload;
 import com.qd.peiwen.dcsframework.devices.navigation.message.directive.NavigationPayload;
 import com.qd.peiwen.dcsframework.devices.phonebill.message.directive.PhoneBillPayload;
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.ImageListCardPayload;
@@ -51,8 +50,6 @@ public interface IDCSFrameListener {
     void onRecvServiceListCard(ServiceListCardPayload payload);
 
     void onRecvSMSMessageListCard(SMSMessageListCardPayload payload);
-
-    void onRecvLifeVoice(LifeVoicePayload payload);
 
     void onRecvNavigation(NavigationPayload payload);
 

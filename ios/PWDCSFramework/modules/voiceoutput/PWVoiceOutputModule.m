@@ -37,10 +37,14 @@
         self.speakArray = [NSMutableArray array];
     }
     if(!self.player){
-        self.player = [[PWSynthesisPlayer alloc] initWithChannelType:PW_CHANNEL_AUDIO];
+        self.player = [[PWSynthesisPlayer alloc] initWithChannelType:PW_CHANNEL_SPEAK];
         [self.player initPlayer];
         self.player.delegate = self;
     }
+}
+
+-(BOOL)isAvailableDirective:(NSString *)name{
+    return [PWVoiceOutputModuleSpeak isEqualToString:name];
 }
 
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{

@@ -42,6 +42,9 @@
     }
 }
 
+-(BOOL)isAvailableDirective:(NSString *)name{
+    return ([PWAudioPlayerModulePlay isEqualToString:name] || [PWAudioPlayerModuleStop isEqualToString:name] || [PWAudioPlayerModuleClearQueue isEqualToString:name]);
+}
 
 - (void)process:(NSString *)name payload:(NSDictionary *)payload{
     if([PWAudioPlayerModulePlay isEqualToString:name]){
