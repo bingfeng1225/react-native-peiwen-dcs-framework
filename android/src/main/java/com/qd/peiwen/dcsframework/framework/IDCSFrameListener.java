@@ -53,8 +53,6 @@ public interface IDCSFrameListener {
 
     void onRecvNavigation(NavigationPayload payload);
 
-    void onRecvPhoneBill(PhoneBillPayload payload);
-
     void onRecvTrainTicket(TicketPayload payload);
 
     void onRecvFlightTicket(TicketPayload payload);

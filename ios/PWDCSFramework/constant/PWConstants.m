@@ -7,6 +7,16 @@
 //
 #import "PWConstants.h"
 
+NSString *const PWTicketModuleName = @"TicketInterface";
+NSString *const PWTicketModuleNameSpace = @"ai.hisense.device_interface.openurl";
+NSString *const PWTicketModuleTrain = @"Train";
+NSString *const PWTicketModuleFlight = @"Flight";
+
+
+NSString *const PWChargeModuleName = @"ChargeInterface";
+NSString *const PWChargeModuleNameSpace = @"ai.hisense.device_interface.phonecharge";
+NSString *const PWChargeModulePhoneCharge = @"Phonecharge";
+
 NSString *const PWScreenModuleName = @"ScreenInterface";
 NSString *const PWScreenModuleNameSpace = @"ai.dueros.device_interface.screen";
 NSString *const PWScreenModuleRenderCard = @"RenderCard";
@@ -21,6 +31,10 @@ NSString *const PWSystemModuleName = @"SystemInterface";
 NSString *const PWSystemModuleNameSpace = @"ai.dueros.device_interface.system";
 NSString *const PWSystemModuleSetSessionid = @"SetSessionid";
 NSString *const PWSystemModuleThrowException = @"ThrowException";
+
+NSString *const PWNavigationModuleName = @"NavigationInterface";
+NSString *const PWNavigationModuleNameSpace = @"ai.hisense.device_interface.navigation";
+NSString *const PWNavigationModuleNavigation = @"Navigation";
 
 NSString *const PWAudioPlayerModuleName = @"AudioPlayerInterface";
 NSString *const PWAudioPlayerModuleNameSpace = @"ai.dueros.device_interface.audio_player";

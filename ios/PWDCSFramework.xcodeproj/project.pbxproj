@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0113B18B2182EC900095E7C0 /* PWChargeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113B18A2182EC900095E7C0 /* PWChargeModule.m */; };
+		0113B18F2182EDF10095E7C0 /* PWTicketModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113B18E2182EDF10095E7C0 /* PWTicketModule.m */; };
+		0113B1942182F8870095E7C0 /* PWNavigationModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 0113B1932182F8870095E7C0 /* PWNavigationModule.m */; };
 		012ECB17215B1B7E00B22CA8 /* PWUUIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */; };
 		01335DA72154874800F773E4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01335DA62154874800F773E4 /* AVFoundation.framework */; };
 		01335DB321548C1600F773E4 /* PWChannelPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 01335DB221548C1600F773E4 /* PWChannelPlayer.m */; };
@@ -47,6 +50,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0113B1892182EC900095E7C0 /* PWChargeModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWChargeModule.h; sourceTree = "<group>"; };
+		0113B18A2182EC900095E7C0 /* PWChargeModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWChargeModule.m; sourceTree = "<group>"; };
+		0113B18D2182EDF10095E7C0 /* PWTicketModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWTicketModule.h; sourceTree = "<group>"; };
+		0113B18E2182EDF10095E7C0 /* PWTicketModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWTicketModule.m; sourceTree = "<group>"; };
+		0113B1922182F8870095E7C0 /* PWNavigationModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWNavigationModule.h; sourceTree = "<group>"; };
+		0113B1932182F8870095E7C0 /* PWNavigationModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWNavigationModule.m; sourceTree = "<group>"; };
 		012ECB15215B1B7E00B22CA8 /* PWUUIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PWUUIDManager.h; sourceTree = "<group>"; };
 		012ECB16215B1B7E00B22CA8 /* PWUUIDManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PWUUIDManager.m; sourceTree = "<group>"; };
 		01335DA62154874800F773E4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +117,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0113B1882182EC7C0095E7C0 /* charge */ = {
+			isa = PBXGroup;
+			children = (
+				0113B1892182EC900095E7C0 /* PWChargeModule.h */,
+				0113B18A2182EC900095E7C0 /* PWChargeModule.m */,
+			);
+			path = charge;
+			sourceTree = "<group>";
+		};
+		0113B18C2182EDDD0095E7C0 /* ticket */ = {
+			isa = PBXGroup;
+			children = (
+				0113B18D2182EDF10095E7C0 /* PWTicketModule.h */,
+				0113B18E2182EDF10095E7C0 /* PWTicketModule.m */,
+			);
+			path = ticket;
+			sourceTree = "<group>";
+		};
+		0113B1912182F8720095E7C0 /* navigation */ = {
+			isa = PBXGroup;
+			children = (
+				0113B1922182F8870095E7C0 /* PWNavigationModule.h */,
+				0113B1932182F8870095E7C0 /* PWNavigationModule.m */,
+			);
+			path = navigation;
+			sourceTree = "<group>";
+		};
 		012ECB14215B1B6E00B22CA8 /* uuid */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,8 +181,11 @@
 		01335DBD2154C27000F773E4 /* modules */ = {
 			isa = PBXGroup;
 			children = (
+				0113B18C2182EDDD0095E7C0 /* ticket */,
+				0113B1882182EC7C0095E7C0 /* charge */,
 				0161C0C6215B8F960041581C /* screen */,
 				0161C0C3215B8F580041581C /* system */,
+				0113B1912182F8720095E7C0 /* navigation */,
 				0161C0C4215B8F7D0041581C /* voiceoutput */,
 				0161C0C5215B8F8B0041581C /* audioplayer */,
 				0161C0C7215B8FB70041581C /* speakcontroller */,
@@ -357,6 +396,7 @@
 				01335DB621548C2F00F773E4 /* PWChannelParameters.m in Sources */,
 				0161C0D1215B90570041581C /* PWSpeakControllerModule.m in Sources */,
 				01335DCA2154DB4C00F773E4 /* PWMessageQueue.m in Sources */,
+				0113B18F2182EDF10095E7C0 /* PWTicketModule.m in Sources */,
 				01913E3F2158D87C00D0EFF4 /* PWHTextInputRequest.m in Sources */,
 				014538E7214B564F00E792AF /* PWDCSFramework.m in Sources */,
 				01335DC02154C35000F773E4 /* PWModuleManager.m in Sources */,
@@ -369,6 +409,8 @@
 				0157F746216070DB00FE4B4E /* PWAudioPlayerModule.m in Sources */,
 				01335DC32154C36000F773E4 /* PWBaseModule.m in Sources */,
 				01335DB921548EAE00F773E4 /* PWChannelState.m in Sources */,
+				0113B18B2182EC900095E7C0 /* PWChargeModule.m in Sources */,
+				0113B1942182F8870095E7C0 /* PWNavigationModule.m in Sources */,
 				0161C0C2215B7F930041581C /* PWConstants.m in Sources */,
 				01335DBC2154944B00F773E4 /* PWChannelManager.m in Sources */,
 				01335DB321548C1600F773E4 /* PWChannelPlayer.m in Sources */,

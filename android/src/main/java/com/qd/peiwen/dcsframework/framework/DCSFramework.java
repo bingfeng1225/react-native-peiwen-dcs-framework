@@ -9,7 +9,6 @@ import com.qd.peiwen.dcsframework.devices.navigation.message.directive.Navigatio
 import com.qd.peiwen.dcsframework.devices.phone.listener.IPhoneModuleListener;
 import com.qd.peiwen.dcsframework.devices.phone.message.directive.PhoneCallPayload;
 import com.qd.peiwen.dcsframework.devices.phone.message.directive.PhoneSearchPayload;
-import com.qd.peiwen.dcsframework.devices.phonebill.listener.IPhoneBillModuleListener;
 import com.qd.peiwen.dcsframework.devices.phonebill.message.directive.PhoneBillPayload;
 import com.qd.peiwen.dcsframework.devices.screen.listener.IScreenModuleListener;
 import com.qd.peiwen.dcsframework.devices.screen.message.directive.ImageListCardPayload;
@@ -76,7 +75,6 @@ public class DCSFramework implements
         IVoiceRecognizeModuleListener,
         ISpeakerControllerModuleListener,
         INavigationModuleListener,
-        IPhoneBillModuleListener,
         ITicketModuleListener {
 
     private Context context;
@@ -133,7 +131,6 @@ public class DCSFramework implements
         this.deviceManager.audioPlayerModule().setListener(this);
         this.deviceManager.voiceRecognizeModule().setListener(this);
         this.deviceManager.navigationModule().setListener(this);
-        this.deviceManager.phoneBillModule().setListener(this);
         this.deviceManager.ticketModule().setListener(this);
         this.deviceManager.speakerControllerModule().setListener(this);
         this.deviceManager.voiceOutputModule().setHttpClient(this.httpManager.httpClient());
@@ -617,13 +614,6 @@ public class DCSFramework implements
     public void onRecvFlightTicketPayload(final TicketPayload payload) {
         if (null != listener && null != listener.get()) {
             listener.get().onRecvFlightTicket(payload);
-        }
-    }
-
-    @Override
-    public void onRecvPhoneBill(final PhoneBillPayload payload) {
-        if (null != listener && null != listener.get()) {
-            listener.get().onRecvPhoneBill(payload);
         }
     }
 

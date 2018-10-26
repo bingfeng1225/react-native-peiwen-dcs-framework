@@ -8,16 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class PWTicketModule;
+@class PWChargeModule;
 @class PWScreenModule;
 @class PWSystemModule;
+@class PWNavigationModule;
 @class PWVoiceOutputModule;
 @class PWAudioPlayerModule;
 @class PWVoiceRecognizeModule;
 @class PWSpeakControllerModule;
 @interface PWModuleManager : NSObject
 
+@property (nonatomic,strong) PWTicketModule *ticketModule;
+@property (nonatomic,strong) PWChargeModule *chargeModule;
 @property (nonatomic,strong) PWScreenModule *screenModule;
 @property (nonatomic,strong) PWSystemModule *systemModule;
+@property (nonatomic,strong) PWNavigationModule *navigationModule;
 @property (nonatomic,strong) PWVoiceOutputModule *voiceOutputModule;
 @property (nonatomic,strong) PWAudioPlayerModule *audioPlayerModule;
 @property (nonatomic,strong) PWVoiceRecognizeModule *voiceRecognizeModule;

@@ -95,6 +95,15 @@ RCT_EXPORT_METHOD(releaseFramework){
     NSLog(@"%@",self.bridge);
     RCTEventDispatcher *eventDispatcher = self.bridge.eventDispatcher;
     switch (type) {
+        case ON_RECV_NAVIGATION:
+            [eventDispatcher sendDeviceEventWithName:@"ON_RECV_NAVIGATION" body:content];
+            break;
+        case ON_RECV_TRAIN_TICKET:
+            [eventDispatcher sendDeviceEventWithName:@"ON_RECV_TRAIN_TICKET" body:content];
+            break;
+        case ON_RECV_FLIGHT_TICKET:
+            [eventDispatcher sendDeviceEventWithName:@"ON_RECV_FLIGHT_TICKET" body:content];
+            break;
         case TEXT_INPUT_STARTED:
             [eventDispatcher sendDeviceEventWithName:@"TEXT_INPUT_STARTED" body:content];
             break;

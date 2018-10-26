@@ -12,16 +12,20 @@
 #import "PWHttpManager.h"
 #import "PWMessageQueue.h"
 #import "PWModuleManager.h"
+#import "PWChannelPlayer.h"
+#import "PWSynthesisPlayer.h"
 #import "PWChannelManager.h"
 #import "PWHTextInputRequest.h"
 #import "PWBTextInputRequest.h"
+#import "PWTicketModule.h"
 #import "PWScreenModule.h"
 #import "PWSystemModule.h"
+#import "PWNavigationModule.h"
 #import "PWAudioPlayerModule.h"
 #import "PWVoiceOutputModule.h"
 #import "PWVoiceRecognizeModule.h"
 
-@interface PWFramework () <PWMessageQueueDelegate,PWHTextInputRequestDelegate,PWBTextInputRequestDelegate,PWSystemModuleDelegate,PWScreenModuleDelegate,PWAudioPlayerModuleDelegate,PWVoiceRecognizeModuleDelegate,PWVoiceOutputModuleDelegate>
+@interface PWFramework () <PWMessageQueueDelegate,PWHTextInputRequestDelegate,PWBTextInputRequestDelegate,PWSystemModuleDelegate,PWTicketModuleDelegate,PWScreenModuleDelegate,PWNavigationModuleDelegate,PWAudioPlayerModuleDelegate,PWVoiceRecognizeModuleDelegate,PWVoiceOutputModuleDelegate>
 @property (nonatomic,strong) PWUUIDManager *uuidManager;
 @property (nonatomic,strong) PWHttpManager *httpManager;
 @property (nonatomic,strong) PWMessageQueue *messageQueue;
@@ -67,8 +71,10 @@
 - (void)initModuleManager{
     if(!self.moduleManager){
         self.moduleManager = [[PWModuleManager alloc] init];
+        self.moduleManager.ticketModule.delegate = self;
         self.moduleManager.screenModule.delegate = self;
         self.moduleManager.systemModule.delegate = self;
+        self.moduleManager.navigationModule.delegate = self;
         self.moduleManager.audioPlayerModule.delegate = self;
         self.moduleManager.voiceOutputModule.delegate = self;
         self.moduleManager.voiceOutputModule.deviceID = self.deviceid;
@@ -279,6 +285,15 @@
     }
 }
 
+#pragma mark PWTicketModuleDelegate
+- (void)onRecvTrainPayload:(NSDictionary *)payload{
+    [self sendEvent:ON_RECV_TRAIN_TICKET content:[self dictionary2JsonString:payload]];
+}
+
+- (void)onRecvFlightPayload:(NSDictionary *)payload{
+    [self sendEvent:ON_RECV_FLIGHT_TICKET content:[self dictionary2JsonString:payload]];
+}
+
 #pragma mark PWScreenModuleDelegate
 - (void)onRecvTextCard:(NSDictionary *)payload{
     [self sendEvent:ON_RECEIVE_TEXT_CARD content:[self dictionary2JsonString:payload]];
@@ -305,6 +320,11 @@
 #pragma mark PWSystemModuleDelegate
 - (void)onSessionChanged:(NSString *)session{
     self.uuidManager.lastSession = session;
+}
+
+#pragma mark PWNavigationModuleDelegate
+- (void)onRecvNavigationPayload:(NSDictionary *)payload{
+    [self sendEvent:ON_RECV_NAVIGATION content:[self dictionary2JsonString:payload]];
 }
 
 #pragma mark PWAudioPlayerModuleDelegate

@@ -240,12 +240,11 @@ public class PWDCSFrameworkModule extends ReactContextBaseJavaModule implements 
 
     @Override
     public void onRecvNavigation(NavigationPayload payload) {
-
-    }
-
-    @Override
-    public void onRecvPhoneBill(PhoneBillPayload payload) {
-
+        this.context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(
+                        RNEventType.ON_RECV_NAVIGATION.name(),
+                        new Gson().toJson(payload).toString()
+                );
     }
 
     @Override

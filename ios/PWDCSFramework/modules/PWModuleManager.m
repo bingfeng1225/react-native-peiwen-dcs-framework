@@ -7,9 +7,12 @@
 //
 
 
+#import "PWTicketModule.h"
+#import "PWChargeModule.h"
 #import "PWModuleManager.h"
 #import "PWScreenModule.h"
 #import "PWSystemModule.h"
+#import "PWNavigationModule.h"
 #import "PWVoiceOutputModule.h"
 #import "PWAudioPlayerModule.h"
 #import "PWVoiceRecognizeModule.h"
@@ -26,12 +29,22 @@
     if(self = [super init]){
         //TODO 创建各个端能力对象并加入字典
         self.modules = [NSMutableDictionary dictionary];
+        
+        self.ticketModule = [[PWTicketModule alloc] init];
+        [self.modules setObject:self.ticketModule forKey:self.ticketModule.nameSpace];
+        
+        self.chargeModule = [[PWChargeModule alloc] init];
+        [self.modules setObject:self.chargeModule forKey:self.chargeModule.nameSpace];
+        
         self.screenModule = [[PWScreenModule alloc] init];
         [self.modules setObject:self.screenModule forKey:self.screenModule.nameSpace];
         
         self.systemModule = [[PWSystemModule alloc] init];
         [self.modules setObject:self.systemModule forKey:self.systemModule.nameSpace];
 
+        self.navigationModule = [[PWNavigationModule alloc] init];
+        [self.modules setObject:self.navigationModule forKey:self.navigationModule.nameSpace];
+        
         self.audioPlayerModule = [[PWAudioPlayerModule alloc] init];
         [self.modules setObject:self.audioPlayerModule forKey:self.audioPlayerModule.nameSpace];
         
